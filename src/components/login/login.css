@@ -1,0 +1,36 @@
+.login-page {
+  width: 380px;
+  padding: 10% 0 0;
+  margin: auto;
+}
+.form {
+  box-shadow: 5px 5px 5px 5px #e2e2e2;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+}
+h1 {
+  font-size: 40px;
+}
+.check {
+  margin: 10px 0;
+}
+.btn-submit {
+  margin: 10px 0;
+  width: 80px;
+}
+.btn-cancel {
+  margin: 10px 10px 10px 0;
+  width: 80px;
+}
+.forget {
+  margin: 10px 0;
+}
+
+.form-email {
+  text-align: center;
+}

@@ -1,0 +1,112 @@
+.table {
+  margin: 5px;
+}
+.btn-export {
+  margin-top: 10px;
+  float: right;
+}
+.data-sample-request {
+  padding: 20px 10%;
+}
+.data-item {
+  font: 1.3em sans-serif;
+  margin-top: 10px;
+}
+.form-item {
+  margin-top: 30px;
+}
+.ant-form-item-label {
+  text-align: center !important;
+}
+
+.ant-form-item {
+  margin-bottom: 10px !important;
+}
+.form-select {
+  margin-top: 30px;
+}
+
+.table-wordsheet {
+  padding: 20px 10%;
+}
+.ant-table-thead > tr > th {
+  text-align: center !important;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-sub-header-background {
+  background: #001529;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+.btn-logout {
+  float: right;
+  margin: 10px;
+}
+
+.btn-footer {
+  float: right;
+  padding: 10px 10%;
+}
+
+.btn-submit {
+  margin-right: 10px !important;
+}
+
+.form-input-product {
+  padding: 20px 0;
+}
+.container {
+  padding: 3%;
+}
+.title {
+  text-align: center;
+}
+
+.btn-down {
+  text-align: center;
+  padding: 5%;
+}
+
+.down-ws {
+  margin: 0 20px;
+}
+
+.down-rp {
+  margin: 0 20px;
+}
+
+.btn-link {
+  text-align: center !important;
+  height: 70px !important;
+  width: 250px !important;
+  margin: 20px 0;
+  font-size: larger;
+}
+
+.ant-col {
+  text-align: center !important;
+}
+
+.group-btn-admin {
+  margin-top: 10px;
+}
+
+.btn-admin {
+  margin-right: 15px;
+}
+
+.form-modal .ant-form-item-label {
+  text-align: left !important;
+}
+
+.ant-layout {
+  min-height: 100vh;
+}

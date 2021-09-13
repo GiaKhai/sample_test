@@ -40,58 +40,60 @@ const ProductQualityReport = () => {
   return (
     <>
       <div className="form-input-product">
-        <Form
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 14 }}
-          name="nest-messages"
-          validateMessages={validateMessages}
-        >
-          <Row>
-            <Col xs={{ span: 15 }}></Col>
-            <Col xs={{ span: 8 }}>
-              <Form.Item
-                label="Reference No:"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Page No"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Date Reported"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
-        </Form>
-        <h1 className="title">Product Quality Report</h1>
-        <div className="data-sample-request">
+        <div className=" data-sample-request">
           <Form
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 14 }}
+            labelCol={{ span: 10 }}
+            wrapperCol={{ span: 18 }}
             name="nest-messages"
             validateMessages={validateMessages}
           >
             <Row>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 0 }} lg={{ span: 15 }}></Col>
+              <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                <Form.Item
+                  label="Reference No:"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  label="Page No"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  label="Date Reported"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </div>
+        <h1 className="title">Product Quality Report</h1>
+        <div className="data-sample-request">
+          <Form
+            labelCol={{ span: 10 }}
+            wrapperCol={{ span: 10 }}
+            name="nest-messages"
+            validateMessages={validateMessages}
+          >
+            <Row>
+              <Col xs={{ span: 24 }} lg={{ span: 15 }}>
                 <Form.Item
                   label="Customer Name"
                   rules={[

@@ -40,7 +40,7 @@ const data = [{}, {}];
 
 const layout = {
   labelCol: {
-    span: 7,
+    span: 10,
   },
   wrapperCol: {
     span: 15,
@@ -68,7 +68,7 @@ const Worksheet = () => {
             validateMessages={validateMessages}
           >
             <Row>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 24 }} lg={{ span: 11 }}>
                 <Form.Item
                   label="Sample Number "
                   rules={[
@@ -130,7 +130,7 @@ const Worksheet = () => {
                   <Input />
                 </Form.Item>
               </Col>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 24 }} lg={{ span: 11 }}>
                 <Form.Item
                   label="Name of Sample"
                   rules={[
@@ -205,7 +205,7 @@ const Worksheet = () => {
             validateMessages={validateMessages}
           >
             <Row>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 24 }} lg={{ span: 11 }}>
                 <Form.Item
                   label="Test by"
                   rules={[
@@ -217,7 +217,7 @@ const Worksheet = () => {
                   <Input />
                 </Form.Item>
               </Col>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 24 }} lg={{ span: 11 }}>
                 <Form.Item
                   label="Cleared by"
                   rules={[

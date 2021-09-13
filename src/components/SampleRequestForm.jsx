@@ -42,7 +42,7 @@ const SampleRequestForm = () => {
             validateMessages={validateMessages}
           >
             <Row>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 24 }} md={{ span: 20 }} lg={{ span: 11 }}>
                 <Form.Item
                   label="Sample Number "
                   rules={[
@@ -104,7 +104,7 @@ const SampleRequestForm = () => {
                   <Input />
                 </Form.Item>
               </Col>
-              <Col xs={{ span: 11 }}>
+              <Col xs={{ span: 24 }} md={{ span: 20 }} lg={{ span: 11 }}>
                 <Form.Item
                   label="Name of Sample"
                   rules={[
@@ -141,7 +141,7 @@ const SampleRequestForm = () => {
 
           <div className="form-select">
             <Form
-              {...layout}
+              labelCol={{ span: 8 }}
               name="nest-messages"
               onFinish={onFinish}
               validateMessages={validateMessages}
@@ -155,16 +155,17 @@ const SampleRequestForm = () => {
                         required: true,
                       },
                     ]}
-                  ></Form.Item>
-                  <Select
-                    defaultValue="1"
-                    style={{ width: 162 }}
-                    onChange={handleChange}
                   >
-                    <Option value="1">Item1</Option>
-                    <Option value="2">Item2</Option>
-                    <Option value="3">Item3</Option>
-                  </Select>
+                    <Select
+                      defaultValue="1"
+                      style={{ width: 162 }}
+                      onChange={handleChange}
+                    >
+                      <Option value="1">Item1</Option>
+                      <Option value="2">Item2</Option>
+                      <Option value="3">Item3</Option>
+                    </Select>
+                  </Form.Item>
                 </Col>
               </Row>
             </Form>

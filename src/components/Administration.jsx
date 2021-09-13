@@ -9,21 +9,27 @@ const columns = [
     title: "No",
     dataIndex: "no",
     align: "center",
+    fixed: "left",
+    width: 70,
   },
   {
     title: "First Name",
     dataIndex: "firstName",
     align: "center",
+    fixed: "left",
+    width: 100,
   },
   {
     title: "Last Name",
     dataIndex: "lastName",
     align: "center",
+    width: 100,
   },
   {
     title: "Title",
     dataIndex: "title",
     align: "center",
+    width: 100,
   },
   {
     title: "Email",
@@ -34,6 +40,7 @@ const columns = [
     title: "Access Level",
     dataIndex: "accessLevel",
     align: "center",
+    width: 120,
   },
   {
     title: "Last Login (Date)",
@@ -222,6 +229,7 @@ const Administration = () => {
         dataSource={data}
         bordered={true}
         pagination={false}
+        scroll={{ x: 1000 }}
       />
       <div className="btn-export">
         <Button type="primary">Export</Button>

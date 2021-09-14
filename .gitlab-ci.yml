@@ -16,5 +16,5 @@ deploy to S3:
   script:
     - aws --version
     - aws s3 rm s3://$S3_SIT_BUCKET --recursive
-    - aws s3 cp ./ s3://$S3_SIT_BUCKET/ --recursive --exclude
+    - aws s3 cp ./ s3://$S3_SIT_BUCKET/ --recursive --exclude ".gitlab-ci.yml"
     - aws cloudfront create-invalidation --distribution-id $SIT_CLOUDFRONT_DIST --paths "/*"

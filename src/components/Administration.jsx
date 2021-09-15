@@ -1,8 +1,23 @@
 import React, { useState } from "react";
 import "./style.css";
 
-import { Form, Input, Row, Col, Table, Button, Modal, Select } from "antd";
+import {
+  Form,
+  Input,
+  Row,
+  Col,
+  Table,
+  Button,
+  Modal,
+  Select,
+  Switch,
+} from "antd";
+
 const { Option } = Select;
+
+function onChange(checked) {
+  console.log(`switch to ${checked}`);
+}
 
 const columns = [
   {
@@ -40,17 +55,28 @@ const columns = [
     title: "Access Level",
     dataIndex: "accessLevel",
     align: "center",
-    width: 120,
+    width: 130,
   },
   {
-    title: "Last Login (Date)",
+    title: "Last Login",
     dataIndex: "date",
     align: "center",
   },
   {
-    title: "Last Login (Time)",
-    dataIndex: "time",
+    title: "Status",
+    dataIndex: "status",
     align: "center",
+    render: () => (
+      <>
+        <Switch
+          checkedChildren="Active"
+          unCheckedChildren="Inactvie"
+          defaultChecked
+          onChange={onChange}
+        />
+      </>
+    ),
+    width: 130,
   },
 ];
 const data = [
@@ -64,7 +90,6 @@ const data = [
     accessLevel: "Manager",
     status: "active",
     date: "17-Aug-21",
-    time: "1533h",
   },
   {
     key: "2",
@@ -76,7 +101,6 @@ const data = [
     accessLevel: "Manager",
     status: "active",
     date: "17-Aug-21",
-    time: "1533h",
   },
   {
     key: "3",
@@ -88,7 +112,6 @@ const data = [
     accessLevel: "Manager",
     status: "active",
     date: "17-Aug-21",
-    time: "1533h",
   },
 ];
 

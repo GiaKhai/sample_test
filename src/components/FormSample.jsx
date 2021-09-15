@@ -92,6 +92,7 @@ const Form = () => {
           dataSource={data}
           bordered={true}
           pagination={false}
+          scroll={{ x: 1000 }}
         />
         <div className="btn-export">
           <Button type="primary">Export</Button>

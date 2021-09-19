@@ -4,9 +4,9 @@ import "./login.css";
 import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 
-const Forget = ({ form, handleOk }) => {
+const ResetPass = ({ form, handleOk }) => {
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log("Failed", errorInfo);
   };
 
   return (
@@ -27,20 +27,44 @@ const Forget = ({ form, handleOk }) => {
         form={form}
         onFinishFailed={onFinishFailed}
       >
-        <h4>Please input your email</h4>
+        <h4>Please type in new password</h4>
         <Form.Item
-          className="form-email"
-          name="email"
+          name="password"
           rules={[
             {
               required: true,
-              message: "Please input your email!",
+              message: "Please input your password!",
             },
           ]}
+          hasFeedback
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
 
+        <h4>Please confirm your password</h4>
+        <Form.Item
+          name="confirm"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please confirm your password!",
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error("The two passwords that you entered do not match!")
+                );
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
         <div>
           <Button className="btn-cancel" type="primary">
             <Link to="/">Cancel</Link>
@@ -53,4 +77,4 @@ const Forget = ({ form, handleOk }) => {
     </div>
   );
 };
-export default Forget;
+export default ResetPass;

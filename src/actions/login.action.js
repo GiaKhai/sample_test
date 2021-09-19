@@ -1,14 +1,13 @@
+import { loginURL, baseURL } from "../constants/backend_url";
+
 export const loginUser = async (body) => {
-  const response = await fetch(
-    `https://under-army-be.herokuapp.com/api/login/`,
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  const response = await fetch(`${baseURL}${loginURL}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
   if (response.status === 200) {
     const data = await response.json();
     document.cookie = `token=${data.access}`;

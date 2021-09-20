@@ -20,6 +20,15 @@ const userReducers = (state = initialState, action) => {
         isError: true,
       };
 
+    case userConstants.POST_USER_SUCCESS:
+      return {
+        ...state,
+      };
+    case userConstants.POST_USER_ERROR:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

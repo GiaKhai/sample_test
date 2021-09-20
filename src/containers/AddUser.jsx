@@ -1,0 +1,23 @@
+import ModalAddUser from "components/ModalAddUser";
+import { useForm } from "antd/lib/form/Form";
+import { postUserAction } from "actions/user.action";
+import { getCookie } from "utils/getCookie";
+
+const AddUser = ({ isModalVisible, handleCancel }) => {
+  const [form] = useForm();
+  const handleSubmit = () => {
+    let token = getCookie("token");
+    let body = form.getFieldsValue();
+    postUserAction(token, body);
+  };
+
+  return (
+    <ModalAddUser
+      form={form}
+      handleSubmit={handleSubmit}
+      isModalVisible={isModalVisible}
+      handleCancel={handleCancel}
+    />
+  );
+};
+export default AddUser;

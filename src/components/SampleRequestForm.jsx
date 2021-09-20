@@ -15,7 +15,7 @@ const layout = {
 };
 
 function handleChange(value) {
-  console.log(`selected ${value}`);
+  // console.log(`selected ${value}`);
 }
 
 const validateMessages = {
@@ -23,9 +23,7 @@ const validateMessages = {
 };
 
 const SampleRequestForm = () => {
-  const onFinish = (values) => {
-    console.log(values);
-  };
+  const onFinish = (values) => {};
   return (
     <>
       <FormSample />

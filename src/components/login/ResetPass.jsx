@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ResetPass = ({ form, handleOk }) => {
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed", errorInfo);
+    // console.log("Failed", errorInfo);
   };
 
   return (

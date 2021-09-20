@@ -52,9 +52,7 @@ const validateMessages = {
 };
 
 const Worksheet = () => {
-  const onFinish = (values) => {
-    console.log(values);
-  };
+  const onFinish = (values) => {};
   return (
     <>
       <FormSample />

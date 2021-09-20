@@ -9,7 +9,6 @@ const User = () => {
   const token = getCookie("token");
 
   const userList = useSelector((state) => state.userReducers.userList);
-  console.log(userList);
 
   useEffect(() => {
     dispatch(getUserAction(token));

@@ -11,7 +11,7 @@ const userReducers = (state = initialState, action) => {
     case userConstants.GET_USER_SUCCESS:
       return {
         ...state,
-        userList: data.data.results,
+        userList: data.data,
       };
 
     case userConstants.GET_USER_FAIL:

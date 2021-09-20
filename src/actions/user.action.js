@@ -10,19 +10,24 @@ const getUserSuccess = (data) => {
   };
 };
 
-const getCategoryFail = () => {
+const getUserFail = () => {
   return {
     type: userConstants.GET_USER_FAIL,
   };
 };
 
-export const getUserAction = () => {
+export const getUserAction = (token) => {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
   return async (dispatch) => {
-    const response = await axios.get(`${baseURL}${userURL}`);
+    const response = await axios.get(`${baseURL}${userURL}`, config);
     if (response.status === 200) {
       dispatch(getUserSuccess(response));
     } else {
-      dispatch(getCategoryFail());
+      dispatch(getUserFail());
     }
   };
 };

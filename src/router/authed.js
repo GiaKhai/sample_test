@@ -7,7 +7,7 @@ import { Layout } from "antd";
 import Home from "../components/Home";
 import SampleRequestForm from "../components/SampleRequestForm.jsx";
 import CompletedSampleHistory from "../components/CompletedSampleHistory.jsx";
-import Administration from "../components/Administration";
+import User from "../containers/User.jsx";
 import Worksheet from "../components/Worksheet";
 import ProductQualityReport from "../components/ProductQualityReport";
 
@@ -31,7 +31,7 @@ const Authed = () => {
               <CompletedSampleHistory />
             </Route>
             <Route exact path="/administration">
-              <Administration />
+              <User />
             </Route>
             <Route exact path="/worksheet">
               <Worksheet />

@@ -12,9 +12,10 @@ const logoutOnClick = async () => {
   const { success, message } = await logoutUser(refresh);
   if (success) {
     localStorage.clear();
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie =
+      "token=; expires=" + new Date().toUTCString() + ";path=/;";
     setTimeout(() => {
-      window.location.reload();
+      window.location.replace(`/`);
     }, 500);
     Message.success(message);
   } else {

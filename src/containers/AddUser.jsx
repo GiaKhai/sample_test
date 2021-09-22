@@ -6,6 +6,7 @@ import { getCookie } from "utils/getCookie";
 const AddUser = ({ isModalVisible, handleCancel }) => {
   const [form] = useForm();
   const handleSubmit = () => {
+    form.validateFields();
     let token = getCookie("token");
     let body = form.getFieldsValue();
     postUserAction(token, body);

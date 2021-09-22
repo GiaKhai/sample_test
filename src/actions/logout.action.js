@@ -1,10 +1,11 @@
+import { getCookie } from "utils/getCookie";
 import { logoutURL, baseURL } from "../constants/backend_url";
 
 export const logoutUser = async (body) => {
   const response = await fetch(`${baseURL}${logoutURL}`, {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + localStorage.getItem("token"),
+      Authorization: "Bearer " + getCookie("token"),
       "content-type": "application/json",
     },
     body: JSON.stringify({

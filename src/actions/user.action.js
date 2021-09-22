@@ -1,8 +1,9 @@
 import axios from "axios";
-
 import { userURL, baseURL } from "../constants/backend_url";
 import { userConstants } from "../constants/user.constants";
 import { message as Message } from "antd";
+import { getCookie } from "utils/getCookie";
+let token = getCookie("token");
 
 const getUserSuccess = (data) => {
   return {
@@ -17,7 +18,7 @@ const getUserFail = () => {
   };
 };
 
-export const getUserAction = (token) => {
+export const getUserAction = () => {
   let config = {
     headers: {
       Authorization: "Bearer " + token,
@@ -33,7 +34,7 @@ export const getUserAction = (token) => {
   };
 };
 
-export const postUserAction = async (token, body) => {
+export const postUserAction = async (body) => {
   let config = {
     headers: {
       Authorization: "Bearer " + token,

@@ -2,10 +2,6 @@ import React from "react";
 import { Form, Input, Row, Col, Modal, Select } from "antd";
 const { Option } = Select;
 
-const validateMessages = {
-  required: "Please input!",
-};
-
 const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
   return (
     <div>
@@ -21,7 +17,6 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
           wrapperCol={{ span: 20 }}
           layout="vertical"
           name="nest-messages"
-          validateMessages={validateMessages}
         >
           <Row>
             <Col xs={{ span: 12 }}>
@@ -32,6 +27,7 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Enter your first name",
                   },
                 ]}
               >
@@ -46,6 +42,22 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Enter your last name",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col xs={{ span: 12 }}>
+              <Form.Item
+                name="title"
+                id="title"
+                label="Title:"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter your title",
                   },
                 ]}
               >
@@ -55,31 +67,17 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
             <Col xs={{ span: 12 }}>
               <Form.Item
                 name="role"
-                id="role"
-                label="Title:"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col xs={{ span: 12 }}>
-              <Form.Item
-                name="level"
                 label="Access Level:"
                 rules={[
                   {
                     required: true,
+                    message: "Select your access level",
                   },
                 ]}
               >
                 <Select allowClear>
-                  <Option value="manager">Manager</Option>
-                  <Option value="emale">female</Option>
-                  <Option value="other">other</Option>
+                  <Option value="Manager">Manager</Option>
+                  <Option value="Chemist">Chemist</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -91,6 +89,23 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                   {
                     required: true,
                     message: "Please input your password!",
+                  },
+                  {
+                    validator: (_, value) => {
+                      var regex = new RegExp(
+                        /^(?=.*[0-9])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/
+                      );
+                      if (value) {
+                        if (value.match(regex)) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          "Minimum 8 characters, At least 1 UPPER CASE, 1 lower case, 1 number "
+                        );
+                      }
+
+                      return Promise.resolve();
+                    },
                   },
                 ]}
                 hasFeedback
@@ -132,7 +147,9 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                 label="Email"
                 rules={[
                   {
+                    type: "email",
                     required: true,
+                    message: "The input is not valid Email",
                   },
                 ]}
               >
@@ -146,6 +163,7 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                 rules={[
                   {
                     required: true,
+                    message: "Please input your status!",
                   },
                 ]}
               >

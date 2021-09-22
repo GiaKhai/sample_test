@@ -1,3 +1,4 @@
+import PageNotFound from "components/NotFound";
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import ResetPass from "../components/login/ResetPass";
@@ -16,6 +17,9 @@ const Public = () => {
         </Route>
         <Route exact path="/password-reset">
           <ResetPass />
+        </Route>
+        <Route path="*">
+          <PageNotFound />
         </Route>
       </Switch>
     </>

@@ -10,6 +10,7 @@ import CompletedSampleHistory from "../components/CompletedSampleHistory.jsx";
 import User from "../containers/User.jsx";
 import Worksheet from "../components/Worksheet";
 import ProductQualityReport from "../components/ProductQualityReport";
+import PageNotFound from "components/NotFound";
 
 const { Content } = Layout;
 
@@ -38,6 +39,9 @@ const Authed = () => {
             </Route>
             <Route exact path="/product-quality-report">
               <ProductQualityReport />
+            </Route>
+            <Route path="*">
+              <PageNotFound />
             </Route>
           </Switch>
         </Content>

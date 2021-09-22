@@ -1,5 +1,5 @@
 import axios from "axios";
-import { userURL, baseURL } from "../constants/backend_url";
+import { userURL, baseURL, userStatusURL } from "../constants/backend_url";
 import { userConstants } from "../constants/user.constants";
 import { message as Message } from "antd";
 import { getCookie } from "utils/getCookie";
@@ -40,11 +40,27 @@ export const postUserAction = async (body) => {
       Authorization: "Bearer " + token,
     },
   };
+  // console.log("response");
+
   const response = await axios.post(`${baseURL}${userURL}`, body, config);
-  console.log(response);
   if (response.status === 201) {
     Message.success("Add user successfully");
-  } else {
+  } else if (response.status === 400) {
     Message.error("Please check again");
+    console.log("error");
+  }
+};
+
+export const updateStatusAction = async (body) => {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+
+  const response = await axios.post(`${baseURL}${userStatusURL}`, body, config);
+
+  if (response.status === 200) {
+    Message.success("Update status user success");
   }
 };

@@ -9,3 +9,5 @@ export const resetPasswordURL = "/api/request-reset-email/";
 export const passwordResetCompleteURL = "/api/password-reset-complete/";
 
 export const userURL = "/api/users/";
+
+export const userStatusURL = "/api/users/status/";

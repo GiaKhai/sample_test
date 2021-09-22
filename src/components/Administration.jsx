@@ -6,38 +6,25 @@ import "./style.css";
 
 import { Table, Button, Switch } from "antd";
 
-function onChange(checked) {
-  // console.log(`switch to ${checked}`);
-}
-
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    // console.log(
-    //   `selectedRowKeys: ${selectedRowKeys}`,
-    //   "selectedRows: ",
-    //   selectedRows
-    // );
-  },
-};
-
-const Administration = ({ userList }) => {
+const Administration = ({ userList, checked, onChange }) => {
+  // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // const onSelectChange = (selectedRowKeys) => {
+  //   console.log("selectedRowKeys changed: ", selectedRowKeys);
+  //   setSelectedRowKeys({ selectedRowKeys });
+  // };
+
+  // const rowSelection = {
+  //   // selectedRowKeys,
+  //   // onChange: onSelectChange(),
+  // };
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
-  };
-
-  const checked = (record) => {
-    let status = "";
-    if (record === "Active") {
-      status = true;
-    } else if (record === "Suspended") {
-      status = false;
-    }
-    return status;
   };
 
   const columns = [
@@ -95,14 +82,16 @@ const Administration = ({ userList }) => {
       title: "Status",
       dataIndex: "status",
       align: "center",
-      render: (record) => (
-        <Switch
-          checkedChildren="Active"
-          unCheckedChildren="Inactive"
-          checked={checked(record)}
-          onChange={onChange}
-        />
-      ),
+      render: (value, row, index) => {
+        return (
+          <Switch
+            checkedChildren="Active"
+            unCheckedChildren="Inactive"
+            defaultChecked={checked(value)}
+            onChange={() => onChange(value, row.id)}
+          />
+        );
+      },
       width: 130,
     },
   ];
@@ -112,7 +101,7 @@ const Administration = ({ userList }) => {
       <h1 className="title">Administration</h1>
 
       <Table
-        rowSelection={rowSelection}
+        // rowSelection={rowSelection}
         columns={columns}
         dataSource={userList}
         bordered={true}

@@ -66,7 +66,7 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
             </Col>
             <Col xs={{ span: 12 }}>
               <Form.Item
-                name="role"
+                name="access_level"
                 label="Access Level:"
                 rules={[
                   {
@@ -150,20 +150,6 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                     type: "email",
                     required: true,
                     message: "The input is not valid Email",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col xs={{ span: 12 }}>
-              <Form.Item
-                name="status"
-                label="Status"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your status!",
                   },
                 ]}
               >

@@ -41,6 +41,7 @@ export const postUserAction = async (body) => {
     },
   };
   const response = await axios.post(`${baseURL}${userURL}`, body, config);
+  console.log(response);
   if (response.status === 201) {
     Message.success("Add user successfully");
   } else {

@@ -93,7 +93,7 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                   {
                     validator: (_, value) => {
                       var regex = new RegExp(
-                        /^(?=.*[0-9])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/
+                        /^(?=.*[0-9])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
                       );
                       if (value) {
                         if (value.match(regex)) {

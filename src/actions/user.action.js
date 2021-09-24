@@ -35,15 +35,25 @@ export const getUserAction = () => {
 };
 
 export const postUserAction = async (body) => {
-  console.log(body);
-  // let config = {
-  //   headers: {
-  //     Authorization: "Bearer " + token,
-  //   },
-  // };
-  // // console.log("response");
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  // console.log("response");
 
-  // const response = await axios.post(`${baseURL}${userURL}`, body, config);
+  await axios
+    .post(`${baseURL}${userURL}`, body, config)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error.response.data.email[0]);
+      Message.error(error.response.data.email[0]);
+    });
+  console.log("response");
+
   // if (response.status === 201) {
   //   Message.success("Add user successfully");
   // } else if (response.status === 400) {
@@ -51,23 +61,23 @@ export const postUserAction = async (body) => {
   //   console.log("error");
   // }
 
-  const response = await fetch(`${baseURL}${userURL}`, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + getCookie("token"),
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      refresh: body,
-    }),
-  });
-  console.log(response);
-  if (response.status === 201) {
-    Message.success("Add user successfully");
-  } else if (response.status === 400) {
-    Message.error("Please check again");
-    console.log("error");
-  }
+  // const response = await fetch(`${baseURL}${userURL}`, {
+  //   method: "POST",
+  //   headers: {
+  //     Authorization: "Bearer " + getCookie("token"),
+  //     "content-type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     refresh: body,
+  //   }),
+  // });
+  // console.log(response);
+  // if (response.status === 201) {
+  //   Message.success("Add user successfully");
+  // } else if (response.status === 400) {
+  //   Message.error("Please check again");
+  //   console.log("error");
+  // }
 };
 
 export const updateStatusAction = async (body) => {
@@ -76,9 +86,7 @@ export const updateStatusAction = async (body) => {
       Authorization: "Bearer " + token,
     },
   };
-
   const response = await axios.post(`${baseURL}${userStatusURL}`, body, config);
-
   if (response.status === 200) {
     Message.success("Update status user success");
   }

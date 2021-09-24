@@ -6,12 +6,13 @@ import { Layout } from "antd";
 import { logoutUser } from "../actions/logout.action";
 import { Button } from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
+import { getCookie } from "utils/getCookie";
 
 const logoutOnClick = async () => {
-  const refresh = localStorage.getItem("refresh");
+  const refresh = getCookie("refresh");
+
   const { success, message } = await logoutUser(refresh);
   if (success) {
-    localStorage.clear();
     document.cookie =
       "token=; expires=" + new Date().toUTCString() + ";path=/;";
     setTimeout(() => {

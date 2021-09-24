@@ -10,9 +10,9 @@ export const loginUser = async (body) => {
   });
   if (response.status === 200) {
     const data = await response.json();
-    document.cookie = `token=${data.access}`;
-    localStorage.setItem("refresh", data?.refresh);
-    localStorage.setItem("token", data?.access);
+    document.cookie = `token=${data.access};path=/;`;
+    document.cookie = `refresh=${data.refresh};path=/;`;
+
     return {
       success: true,
       mess: "Login Success!",

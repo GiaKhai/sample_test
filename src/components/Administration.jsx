@@ -27,10 +27,6 @@ const Administration = ({
     setIsModalVisible(false);
   };
 
-  // const checkButton = (checkStatusUsers) => {
-  //   if (checkStatusUsers === "Active") return true;
-  // };
-
   const columns = [
     {
       key: "no",
@@ -94,7 +90,7 @@ const Administration = ({
           <Switch
             checkedChildren="Active"
             unCheckedChildren="Inactive"
-            defaultChecked={checked(value)}
+            // defaultChecked={checked(value)}
             checked={value === "Active" ? true : false}
             onChange={() => updateUser(value, row.id)}
           />

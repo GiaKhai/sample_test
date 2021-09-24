@@ -7,10 +7,13 @@ import { getCookie } from "utils/getCookie";
 const User = () => {
   const [list, setList] = useState([]);
   const [checkStatusUsers, setCheckStatusUsers] = useState();
+  const [check, setCheck] = useState(true);
+
   const dispatch = useDispatch();
   const token = getCookie("token");
+
   const userList = useSelector((state) => state.userReducers.userList);
-  const [check, setCheck] = useState(true);
+  userList.sort((a, b) => a.id - b.id); //sort id
 
   useEffect(() => {
     dispatch(getUserAction(token));

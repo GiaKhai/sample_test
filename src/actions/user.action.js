@@ -35,14 +35,33 @@ export const getUserAction = () => {
 };
 
 export const postUserAction = async (body) => {
-  let config = {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  };
-  // console.log("response");
+  console.log(body);
+  // let config = {
+  //   headers: {
+  //     Authorization: "Bearer " + token,
+  //   },
+  // };
+  // // console.log("response");
 
-  const response = await axios.post(`${baseURL}${userURL}`, body, config);
+  // const response = await axios.post(`${baseURL}${userURL}`, body, config);
+  // if (response.status === 201) {
+  //   Message.success("Add user successfully");
+  // } else if (response.status === 400) {
+  //   Message.error("Please check again");
+  //   console.log("error");
+  // }
+
+  const response = await fetch(`${baseURL}${userURL}`, {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + getCookie("token"),
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      refresh: body,
+    }),
+  });
+  console.log(response);
   if (response.status === 201) {
     Message.success("Add user successfully");
   } else if (response.status === 400) {

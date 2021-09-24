@@ -6,19 +6,19 @@ import "./style.css";
 
 import { Table, Button, Switch } from "antd";
 
-const Administration = ({ userList, checked, onChange }) => {
-  // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+const Administration = ({
+  userList,
+  checked,
+  updateUser,
+  onChange,
+  updateListUser,
+  checkStatusUsers,
+}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // const onSelectChange = (selectedRowKeys) => {
-  //   console.log("selectedRowKeys changed: ", selectedRowKeys);
-  //   setSelectedRowKeys({ selectedRowKeys });
-  // };
-
-  // const rowSelection = {
-  //   // selectedRowKeys,
-  //   // onChange: onSelectChange(),
-  // };
+  const rowSelection = {
+    onChange: (rowKey, row) => onChange(rowKey, row),
+  };
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -27,46 +27,52 @@ const Administration = ({ userList, checked, onChange }) => {
     setIsModalVisible(false);
   };
 
+  // const checkButton = (checkStatusUsers) => {
+  //   if (checkStatusUsers === "Active") return true;
+  // };
+
   const columns = [
     {
+      key: "no",
       title: "No",
       dataIndex: "no",
       align: "center",
       fixed: "left",
       width: 70,
-      render: (value, row, index) => index + 1,
+      render: (_, __, index) => index + 1,
     },
     {
+      key: "first_name",
       title: "First Name",
       dataIndex: "first_name",
       align: "center",
       fixed: "left",
-      width: 100,
+      width: 105,
     },
     {
+      key: "last_name",
       title: "Last Name",
       dataIndex: "last_name",
       align: "center",
-      width: 100,
+      width: 110,
     },
     {
+      key: "title",
       title: "Title",
-      dataIndex: "role",
+      dataIndex: "title",
       align: "center",
-      width: 100,
+      width: 120,
     },
+    { key: "email", title: "Email", dataIndex: "email", align: "center" },
     {
-      title: "Email",
-      dataIndex: "email",
-      align: "center",
-    },
-    {
+      key: "access_level",
       title: "Access Level",
-      dataIndex: "Access Level",
+      dataIndex: "access_level",
       align: "center",
       width: 130,
     },
     {
+      key: "last_login",
       title: "Last Login",
       dataIndex: "last_login",
       align: "center",
@@ -79,6 +85,7 @@ const Administration = ({ userList, checked, onChange }) => {
       },
     },
     {
+      key: "status",
       title: "Status",
       dataIndex: "status",
       align: "center",
@@ -88,25 +95,26 @@ const Administration = ({ userList, checked, onChange }) => {
             checkedChildren="Active"
             unCheckedChildren="Inactive"
             defaultChecked={checked(value)}
-            onChange={() => onChange(value, row.id)}
+            checked={value === "Active" ? true : false}
+            onChange={() => updateUser(value, row.id)}
           />
         );
       },
       width: 130,
     },
   ];
-
   return (
     <div className="container">
       <h1 className="title">Administration</h1>
 
       <Table
-        // rowSelection={rowSelection}
+        rowSelection={rowSelection}
         columns={columns}
         dataSource={userList}
         bordered={true}
         pagination={false}
         scroll={{ x: 1000 }}
+        rowKey={(item) => item.id}
       />
       <div className="btn-export">
         <Button type="primary">Export</Button>
@@ -116,10 +124,26 @@ const Administration = ({ userList, checked, onChange }) => {
           Add User
         </Button>
         <AddUser isModalVisible={isModalVisible} handleCancel={handleCancel} />
-        <Button className="btn-admin" type="primary">
+        <Button
+          className="btn-admin"
+          type="primary"
+          disabled={
+            checkStatusUsers === "Suspended" || checkStatusUsers === "other"
+          }
+          onClick={updateListUser}
+        >
           Suspend User
         </Button>
-        <Button className="btn-admin" type="primary">
+        <Button
+          className="btn-admin"
+          type="primary"
+          disabled={
+            checkStatusUsers === "Active" ||
+            checkStatusUsers === "other" ||
+            checkStatusUsers === "all"
+          }
+          onClick={updateListUser}
+        >
           Enable User
         </Button>
       </div>

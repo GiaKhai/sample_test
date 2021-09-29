@@ -74,9 +74,15 @@ const Administration = ({
       align: "center",
       render: (record) => {
         return (
-          <Moment format="D MMM YYYY HH:mm" withTitle>
-            {record}
-          </Moment>
+          <div>
+            {record == null ? (
+              ""
+            ) : (
+              <Moment format="D MMM YYYY HH:mm" withTitle>
+                {record}
+              </Moment>
+            )}
+          </div>
         );
       },
     },
@@ -90,7 +96,6 @@ const Administration = ({
           <Switch
             checkedChildren="Active"
             unCheckedChildren="Inactive"
-            // defaultChecked={checked(value)}
             checked={value === "Active" ? true : false}
             onChange={() => updateUser(value, row.id)}
           />

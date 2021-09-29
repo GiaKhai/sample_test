@@ -6,7 +6,7 @@ import { getCookie } from "utils/getCookie";
 
 const User = () => {
   const [list, setList] = useState([]);
-  const [checkStatusUsers, setCheckStatusUsers] = useState();
+  const [checkStatusUsers, setCheckStatusUsers] = useState("other");
   const [check, setCheck] = useState(true);
 
   const dispatch = useDispatch();
@@ -29,15 +29,15 @@ const User = () => {
     return status;
   };
 
-  const updateUser = (checked, id) => {
+  const updateUser = async (checked, id) => {
     let listId = [id];
     if (checked === "Active") {
       let body = { users: listId, status: "Suspended", apply_all: false };
-      updateStatusAction(body);
+      await updateStatusAction(body);
       setCheck(!check);
     } else {
       let body = { users: listId, status: "Active", apply_all: false };
-      updateStatusAction(body);
+      await updateStatusAction(body);
       setCheck(!check);
     }
   };
@@ -49,31 +49,44 @@ const User = () => {
       result.push(status.status);
     });
     setList(selectedRowKeys);
-
+    if (selectedRowKeys.length === 0) {
+      setCheckStatusUsers("other");
+    }
     result.forEach((status) => {
       if (status === "Active") count++;
     });
-
-    if (result && count === result.length && result.length !== userList.length)
+    console.log(selectedRowKeys);
+    if (
+      result &&
+      count === result.length &&
+      result.length !== userList.length &&
+      count !== 0
+    ) {
       setCheckStatusUsers("Active");
-    else if (result && count === 0) setCheckStatusUsers("Suspended");
-    else if (result && count === selectedRows.length)
+      console.log("ngu");
+    } else if (result && count === 0 && selectedRowKeys.length !== 0) {
+      setCheckStatusUsers("Suspended");
+      console.log("nguuuu");
+    } else if (result && count === selectedRows.length && count !== 0)
       setCheckStatusUsers("all");
     else setCheckStatusUsers("other");
   };
 
-  const updateListUser = () => {
+  const updateListUser = async () => {
     if (checkStatusUsers === "Active") {
       let body = { users: list, status: "Suspended", apply_all: false };
-      updateStatusAction(body);
+      await updateStatusAction(body);
       setCheck(!check);
+      setCheckStatusUsers("Suspended");
     } else if (checkStatusUsers === "Suspended") {
       let body = { users: list, status: "Active", apply_all: false };
-      updateStatusAction(body);
+      await updateStatusAction(body);
       setCheck(!check);
+      setCheckStatusUsers("Active");
     } else if (checkStatusUsers === "all") {
       let body = { users: list, status: "Suspended", apply_all: true };
-      updateStatusAction(body);
+      await updateStatusAction(body);
+      setCheckStatusUsers("other");
       setCheck(!check);
     }
   };

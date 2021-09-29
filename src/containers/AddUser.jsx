@@ -4,10 +4,11 @@ import { postUserAction } from "actions/user.action";
 
 const AddUser = ({ isModalVisible, handleCancel }) => {
   const [form] = useForm();
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     form.validateFields();
     let body = form.getFieldsValue();
-    postUserAction(body);
+    const { success } = await postUserAction(body);
+    if (success) form.resetFields();
   };
 
   return (

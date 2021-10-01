@@ -3,7 +3,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import ResetPass from "../components/login/ResetPass";
 import Forget from "../containers/Forget";
-import Login from "../containers/login";
+import Login from "../containers/Login";
 
 const Public = () => {
   return (

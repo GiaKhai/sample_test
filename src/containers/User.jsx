@@ -13,7 +13,8 @@ const User = () => {
   const token = getCookie("token");
 
   const userList = useSelector((state) => state.userReducers.userList);
-  userList.sort((a, b) => a.id - b.id); //sort id
+  console.log(userList);
+  // userList.sort((a, b) => a.id - b.id); //sort id
 
   useEffect(() => {
     dispatch(getUserAction(token));

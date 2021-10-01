@@ -11,3 +11,7 @@ export const passwordResetCompleteURL = "/api/password-reset-complete/";
 export const userURL = "/api/users/";
 
 export const userStatusURL = "/api/users/status/";
+
+export const sampleRequestURL = "/api/sample-request/";
+
+export const sampleRequestStatusURL = "/api/sample-request/status/";

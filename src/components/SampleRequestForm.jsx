@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-import FormSample from "./FormSample";
-import { Form, Input, Row, Col, Select } from "antd";
+import FormSample from "containers/SampleRequest";
+import { Form, Input, Row, Col, Select, Table } from "antd";
 
 const { Option } = Select;
 
@@ -14,6 +14,39 @@ const layout = {
   },
 };
 
+const columns = [
+  {
+    title: "TEST",
+    dataIndex: "test",
+    key: "test",
+  },
+  {
+    title: "UNIT",
+    dataIndex: "unit",
+    key: "unit",
+  },
+  {
+    title: "METHOD",
+    dataIndex: "method",
+    key: "method",
+  },
+  {
+    title: "SPEC",
+    dataIndex: "spec",
+    key: "spec",
+  },
+  {
+    title: "RESULT",
+    dataIndex: "result",
+    key: "result",
+  },
+  {
+    title: "INITIAL",
+    dataIndex: "initial",
+    key: "initial",
+  },
+];
+
 function handleChange(value) {
   // console.log(`selected ${value}`);
 }
@@ -22,8 +55,7 @@ const validateMessages = {
   required: "$Please input!",
 };
 
-const SampleRequestForm = () => {
-  const onFinish = (values) => {};
+const SampleRequestForm = ({ form, onFinish }) => {
   return (
     <>
       <FormSample />
@@ -38,11 +70,12 @@ const SampleRequestForm = () => {
             name="nest-messages"
             onFinish={onFinish}
             validateMessages={validateMessages}
+            form={form}
           >
             <Row>
               <Col xs={{ span: 24 }} md={{ span: 20 }} lg={{ span: 11 }}>
                 <Form.Item
-                  label="Sample Number "
+                  label="Sample Number"
                   rules={[
                     {
                       required: true,
@@ -63,6 +96,7 @@ const SampleRequestForm = () => {
                 </Form.Item>
                 <Form.Item
                   label="Sample Description"
+                  name="sample_descripton"
                   rules={[
                     {
                       required: true,
@@ -135,39 +169,66 @@ const SampleRequestForm = () => {
                 </Form.Item>
               </Col>
             </Row>
-          </Form>
 
-          <div className="form-select">
-            <Form
-              labelCol={{ span: 8 }}
-              name="nest-messages"
-              onFinish={onFinish}
-              validateMessages={validateMessages}
-            >
-              <Row>
-                <Col xs={{ span: 11 }}>
-                  <Form.Item
-                    label="Worksheet"
-                    rules={[
-                      {
-                        required: true,
-                      },
-                    ]}
+            <Row>
+              <Col xs={{ span: 11 }}>
+                <Form.Item
+                  label="Worksheet"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Select
+                    defaultValue="1"
+                    style={{ width: 162 }}
+                    onChange={handleChange}
                   >
-                    <Select
-                      defaultValue="1"
-                      style={{ width: 162 }}
-                      onChange={handleChange}
-                    >
-                      <Option value="1">Item1</Option>
-                      <Option value="2">Item2</Option>
-                      <Option value="3">Item3</Option>
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Form>
-          </div>
+                    <Option value="1">Item1</Option>
+                    <Option value="2">Item2</Option>
+                    <Option value="3">Item3</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+            <div className="table-wordsheet">
+              <Table
+                className
+                columns={columns}
+                // dataSource={data}
+                bordered={true}
+                pagination={false}
+                scroll={{ y: 240 }}
+              />
+            </div>
+            <Row>
+              <Col xs={{ span: 24 }} lg={{ span: 11 }}>
+                <Form.Item
+                  label="Test by"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col xs={{ span: 24 }} lg={{ span: 11 }}>
+                <Form.Item
+                  label="Cleared by"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
         </div>
       </div>
     </>

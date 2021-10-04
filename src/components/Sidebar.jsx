@@ -21,14 +21,11 @@ class Sidebar extends React.Component {
       >
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["0"]}>
-          <Menu.Item key="0">
-            <Link to="/">Home</Link>
-          </Menu.Item>
           <Menu.Item key="1">
-            <Link to="/sample-request-form">Sample Submission</Link>
+            <Link to="/">Sample Submission</Link>
           </Menu.Item>
           <Menu.Item key="2">
-            <Link to="/product-quality-report">Sample Testing</Link>
+            <Link to="/sample-testing">Sample Testing</Link>
           </Menu.Item>
           <Menu.Item key="3">
             <Link to="/worksheet">Sample Approval</Link>

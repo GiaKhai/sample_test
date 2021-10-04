@@ -1,5 +1,6 @@
-import React from "react";
-import { Table, Button } from "antd";
+import React, { useState, useRef } from "react";
+import { Table, Button, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 import Moment from "react-moment";
 import "./style.css";
 
@@ -38,6 +39,10 @@ const columns = [
     key: "worksheet",
     width: 110,
     align: "center",
+    sorter: {
+      compare: (a, b) => a.worksheet - b.worksheet,
+      multiple: 1,
+    },
   },
   {
     title: "Test Description",
@@ -161,23 +166,72 @@ const columns = [
     width: 110,
     align: "center",
   },
+  {
+    title: "Action",
+    key: "action",
+    render: () => <Button type="primary">Export</Button>,
+    width: 30,
+    align: "center",
+  },
 ];
 
-const FormSample = ({ sampleList }) => {
+const FormSample = ({ sampleList, setIsModalVisible, show }) => {
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  const typingTimeoutRef = useRef(null);
+
+  const onsubmit = (newfilter) => {
+    setFilter(newfilter);
+    console.log(filter);
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+
+    if (!onsubmit) return;
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      const formValue = { search: value };
+      onsubmit(formValue);
+    }, 400);
+  };
   return (
     <>
+      <div className="search-input">
+        <form>
+          <Input
+            size="large"
+            placeholder="Search"
+            prefix={<SearchOutlined />}
+            value={search}
+            onChange={handleChange}
+          />
+        </form>
+      </div>
+
       <div className="table">
         <Table
           className
           columns={columns}
           dataSource={sampleList}
           bordered={true}
-          pagination={false}
+          pagination={{ pageSize: 10 }}
           scroll={{ x: 2000 }}
+          rowKey={(item) => item.id}
+          onRow={(record, rowIndex) => {
+            return {
+              onClick: (event) => {
+                console.log(record.id);
+                show && setIsModalVisible(true);
+              }, // click row
+            };
+          }}
         />
-        <div className="btn-export">
-          <Button type="primary">Export</Button>
-        </div>
       </div>
     </>
   );

@@ -15,3 +15,5 @@ export const userStatusURL = "/api/users/status/";
 export const sampleRequestURL = "/api/sample-request/";
 
 export const sampleRequestStatusURL = "/api/sample-request/status/";
+
+export const testURL = "/api/test/";

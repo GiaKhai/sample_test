@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Moment from "react-moment";
 import AddUser from "containers/AddUser";
+import { SearchOutlined } from "@ant-design/icons";
+import { Table, Button, Switch, Input } from "antd";
 
 import "./style.css";
-
-import { Table, Button, Switch } from "antd";
 
 const Administration = ({
   userList,
@@ -15,6 +15,30 @@ const Administration = ({
   checkStatusUsers,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  const typingTimeoutRef = useRef(null);
+
+  const onsubmit = (newfilter) => {
+    setFilter(newfilter);
+    console.log(filter);
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+
+    if (!onsubmit) return;
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      const formValue = { search: value };
+      onsubmit(formValue);
+    }, 400);
+  };
 
   const rowSelection = {
     onChange: (rowKey, row) => onChange(rowKey, row),
@@ -107,19 +131,27 @@ const Administration = ({
   return (
     <div className="container">
       <h1 className="title">Administration</h1>
-
+      <div className="search-input">
+        <form>
+          <Input
+            size="large"
+            placeholder="Search"
+            prefix={<SearchOutlined />}
+            value={search}
+            onChange={handleChange}
+          />
+        </form>
+      </div>
       <Table
         rowSelection={rowSelection}
         columns={columns}
         dataSource={userList}
         bordered={true}
-        pagination={false}
+        pagination={{ pageSize: 10 }}
         scroll={{ x: 1000 }}
         rowKey={(item) => item.id}
       />
-      <div className="btn-export">
-        <Button type="primary">Export</Button>
-      </div>
+
       <div className="group-btn-admin">
         <Button className="btn-admin" onClick={showModal} type="primary">
           Add User

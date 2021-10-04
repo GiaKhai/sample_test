@@ -75,7 +75,7 @@ const ModalAddUser = ({ form, handleSubmit, handleCancel, isModalVisible }) => {
                   },
                 ]}
               >
-                <Select allowClear>
+                <Select allowClear defaultValue="Manager">
                   <Option value="Manager">Manager</Option>
                   <Option value="Chemist">Chemist</Option>
                 </Select>

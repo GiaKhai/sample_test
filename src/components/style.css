@@ -6,7 +6,7 @@
   float: right;
 }
 .data-sample-request {
-  padding: 20px 10%;
+  padding: 20px;
 }
 .data-item {
   font: 1.3em sans-serif;
@@ -65,7 +65,6 @@
 }
 .title {
   text-align: center;
-  margin-top: 50px;
 }
 
 .btn-down {
@@ -106,3 +105,15 @@
 .ant-layout {
   min-height: 100vh;
 }
+
+.add-sample {
+  margin: 10px;
+  float: right;
+}
+.search-input {
+  width: 35%;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.group-btn-admin {display: inline-flex;}

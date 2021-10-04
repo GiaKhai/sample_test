@@ -373,9 +373,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                 dataSource={data}
                 columns={mergedColumns}
                 rowClassName="editable-row"
-                pagination={{
-                  onChange: cancel,
-                }}
+                pagination={false}
                 rowKey={(item) => {
                   // console.log(item.id);
                   return item.id;

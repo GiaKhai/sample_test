@@ -4,11 +4,10 @@ import AddUser from "containers/AddUser";
 import { SearchOutlined } from "@ant-design/icons";
 import { Table, Button, Switch, Input } from "antd";
 
-import "./style.css";
+import "../style.css";
 
 const Administration = ({
   userList,
-  checked,
   updateUser,
   onChange,
   updateListUser,

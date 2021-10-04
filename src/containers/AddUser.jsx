@@ -1,4 +1,4 @@
-import ModalAddUser from "components/ModalAddUser";
+import ModalAddUser from "components/Admin/ModalAddUser";
 import { useForm } from "antd/lib/form/Form";
 import { postUserAction } from "actions/user.action";
 

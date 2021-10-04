@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Administration from "../components/Administration";
+import Administration from "../components/Admin/Administration";
 import { getUserAction, updateStatusAction } from "actions/user.action";
 import { getCookie } from "utils/getCookie";
 

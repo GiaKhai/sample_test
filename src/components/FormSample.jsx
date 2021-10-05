@@ -236,7 +236,7 @@ const FormSample = ({
             return {
               onClick: (event) => {
                 show && setIsModalVisible(true);
-                // setSampleIdClick(record.sample_request_id);
+                show && setSampleIdClick(record.sample_request_id);
               }, // click row
             };
           }}

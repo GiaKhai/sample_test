@@ -10,6 +10,7 @@ import {
   Typography,
   Button,
 } from "antd";
+// import { useSelector } from "react-redux";
 
 // import { useDispatch } from "react-redux";
 // import { getCookie } from "utils/getCookie.js";
@@ -55,16 +56,28 @@ const EditableCell = ({
   );
 };
 
-const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
-  // let token = getCookie("token");
-  // const dispatch = useDispatch();
+const ModalTesting = ({
+  isModalVisible,
+  handleOk,
+  handleCancel,
+  sampleIdClick,
+}) => {
   const [form] = Form.useForm();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [editingKey, setEditingKey] = useState("");
-  // useEffect(() => {
-  //   dispatch(getTest(token));
-  // }, [dispatch, token]);
-  // const testList = useSelector((state) => state.testReducers.testList.results);
+
+  // const sampleList = useSelector(
+  //   (state) => state.sampleReducers.sampleList.results
+  // );
+  // console.log(sampleIdClick);
+
+  // const test = sampleList?.find(
+  //   (item) => item.sample_request_id === sampleIdClick
+  // );
+
+  // setData(test.results);
+
+  // console.log(test);
 
   // useEffect(() => {
   //   setData(testList);

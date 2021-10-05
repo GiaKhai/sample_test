@@ -3,17 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import FormSample from "components/FormSample";
 import { getCookie } from "utils/getCookie";
 import { getSampleRequest } from "actions/sample-request.action";
+import { getMeAction } from "actions/me.action";
 
 const SampleRequest = ({ setIsModalVisible, show, setSampleIdClick }) => {
   let token = getCookie("token");
   const dispatch = useDispatch();
-  const sampleList = useSelector(
-    (state) => state.sampleReducers.sampleList.results
-  );
 
   useEffect(() => {
     dispatch(getSampleRequest(token));
+    dispatch(getMeAction(token));
   }, [dispatch, token]);
+
+  const sampleList = useSelector(
+    (state) => state.sampleReducers.sampleList.results
+  );
 
   return (
     <FormSample

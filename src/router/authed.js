@@ -10,10 +10,13 @@ import User from "../containers/User.jsx";
 import SampleTesting from "../components/SampleTesting/SampleTesting";
 import PageNotFound from "components/NotFound";
 import SampleApproval from "components/SampleApproval/SampleApproval";
+import { useSelector } from "react-redux";
 
 const { Content } = Layout;
 
 const Authed = () => {
+  const me = useSelector((state) => state.meReducers.me.access_level);
+
   return (
     <Layout>
       <Sidebar />
@@ -27,15 +30,20 @@ const Authed = () => {
             <Route exact path="/sample-testing">
               <SampleTesting />
             </Route>
-            <Route exact path="/sample-approval">
-              <SampleApproval />
-            </Route>
-            <Route exact path="/completed-sample-history">
-              <CompletedSampleHistory />
-            </Route>
-            <Route exact path="/administration">
-              <User />
-            </Route>
+
+            {me === "Manager" && (
+              <>
+                <Route exact path="/sample-approval">
+                  <SampleApproval />
+                </Route>
+                <Route exact path="/completed-sample-history">
+                  <CompletedSampleHistory />
+                </Route>
+                <Route exact path="/administration">
+                  <User />
+                </Route>
+              </>
+            )}
             <Route path="*">
               <PageNotFound />
             </Route>

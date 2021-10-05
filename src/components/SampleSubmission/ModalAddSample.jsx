@@ -1,7 +1,8 @@
-import React from "react";
-import { Modal } from "antd";
-import { Form, Input, Row, Col, Select } from "antd";
-import TableTest from "../../containers/Test";
+import React, { useEffect } from "react";
+import { Form, Input, Row, Col, Select, Table, Modal } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "utils/getCookie";
+import { getWorksheet } from "actions/sample-request.action";
 const { Option } = Select;
 
 const layout = {
@@ -13,18 +14,69 @@ const layout = {
   },
 };
 
-const validateMessages = {
-  required: "$Please input!",
-};
+const ModalAddSample = ({
+  visibleAdd,
+  handleSubmit,
+  handleCancel,
+  form,
+  setData,
+  data,
+}) => {
+  let token = getCookie("token");
+  const dispatch = useDispatch();
+  const worksheetList = useSelector(
+    (state) => state.worksheetReducers.worksheetList.results
+  );
+  useEffect(() => {
+    dispatch(getWorksheet(token));
+  }, [dispatch, token]);
 
-const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
+  const onselect = (value) => {
+    const test = worksheetList.find((item) => item.id === value);
+    setData(test.tests);
+  };
+
+  const columns = [
+    {
+      title: "TEST",
+      dataIndex: "test",
+      key: "test",
+    },
+    {
+      title: "UNIT",
+      dataIndex: "unit",
+      key: "unit",
+    },
+    {
+      title: "METHOD",
+      dataIndex: "method",
+      key: "method",
+    },
+    {
+      title: "SPEC",
+      dataIndex: "spect",
+      key: "spect",
+    },
+    {
+      title: "RESULT",
+      dataIndex: "result",
+      key: "result",
+      editable: true,
+    },
+    {
+      title: "INITIAL",
+      dataIndex: "initial",
+      key: "initial",
+      editable: true,
+    },
+  ];
   return (
     <>
       <Modal
         title="Add sample"
         centered
         visible={visibleAdd}
-        onOk={handleOk}
+        onOk={handleSubmit}
         onCancel={handleCancel}
         width={1000}
       >
@@ -34,8 +86,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
             {...layout}
             name="nest-messages"
             // onFinish={onFinish}
-            validateMessages={validateMessages}
-            // form={form}
+            form={form}
           >
             <Row>
               <Col xs={{ span: 24 }} md={{ span: 20 }} lg={{ span: 11 }}>
@@ -45,6 +96,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please input sample description",
                     },
                   ]}
                 >
@@ -56,6 +108,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please input client name",
                     },
                   ]}
                 >
@@ -67,6 +120,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please input test description",
                     },
                   ]}
                 >
@@ -78,6 +132,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please input source",
                     },
                   ]}
                 >
@@ -91,6 +146,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please input name of sample",
                     },
                   ]}
                 >
@@ -102,6 +158,7 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please input attention",
                     },
                   ]}
                 >
@@ -140,21 +197,32 @@ const ModalAddSample = ({ visibleAdd, handleOk, handleCancel }) => {
                   rules={[
                     {
                       required: true,
+                      message: "Please select worksheet",
                     },
                   ]}
                 >
-                  <Select defaultValue="worksheet1" style={{ width: 162 }}>
-                    <Option value="worksheet1" allowClear>
-                      worksheet1
-                    </Option>
-                    <Option value="worksheet2">worksheet2</Option>
-                    <Option value="worksheet3">worksheet3</Option>
+                  <Select style={{ width: 162 }} onSelect={onselect}>
+                    {worksheetList?.length > 0 &&
+                      worksheetList.map((list) => {
+                        // console.log(list);
+                        return (
+                          <Option value={list.id} key={list.id}>
+                            {list.name}
+                          </Option>
+                        );
+                      })}
                   </Select>
                 </Form.Item>
               </Col>
             </Row>
             <div className="table-wordsheet">
-              <TableTest />
+              <Table
+                pagination={false}
+                bordered
+                dataSource={data}
+                columns={columns}
+                rowKey={(item) => item.id}
+              />
             </div>
           </Form>
         </div>

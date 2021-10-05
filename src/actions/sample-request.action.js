@@ -1,9 +1,13 @@
 import axios from "axios";
-import { baseURL, sampleRequestURL, testURL } from "../constants/backend_url";
+import {
+  baseURL,
+  sampleRequestURL,
+  worksheetURL,
+} from "../constants/backend_url";
 import { getCookie } from "utils/getCookie";
 import { sampleConstants } from "constants/sample.constants";
 import { message as Message } from "antd";
-import { testContants } from "constants/test.contants";
+import { worksheetContants } from "constants/worksheet.contants";
 
 let token = getCookie("token");
 
@@ -20,16 +24,16 @@ const getSampleFail = () => {
   };
 };
 
-const getTestSuccess = (data) => {
+const getworksheetSuccess = (data) => {
   return {
-    type: testContants.GET_TEST_SUCCESS,
+    type: worksheetContants.GET_WORKSHEET_SUCCESS,
     data,
   };
 };
 
-const geTestFail = () => {
+const geworksheetFail = () => {
   return {
-    type: testContants.GET_TEST_FAIL,
+    type: worksheetContants.GET_WORKSHEET_FAIL,
   };
 };
 
@@ -51,7 +55,7 @@ export const getSampleRequest = () => {
   };
 };
 
-export const getTest = () => {
+export const getWorksheet = () => {
   let config = {
     headers: {
       Authorization: "Bearer " + token,
@@ -59,12 +63,12 @@ export const getTest = () => {
   };
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${baseURL}${testURL}`, config);
+      const response = await axios.get(`${baseURL}${worksheetURL}`, config);
       if (response.status === 200) {
-        dispatch(getTestSuccess(response));
+        dispatch(getworksheetSuccess(response));
       }
     } catch (error) {
-      dispatch(geTestFail());
+      dispatch(geworksheetFail());
     }
   };
 };
@@ -86,6 +90,9 @@ export const postSampleRequest = async (body) => {
       Message.success("Add success");
       return { success: true };
     }
-    console.log(response);
-  } catch (error) {}
+  } catch (error) {
+    Message.error("Error");
+    console.log(error);
+    return { success: false };
+  }
 };

@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import userReducers from "./userReducers";
 import sampleReducers from "./sampleReducers";
-import testReducers from "./testReducers";
+import worksheetReducers from "./worksheetReducers";
 
 const rootReducer = combineReducers({
   userReducers,
   sampleReducers,
-  testReducers,
+  worksheetReducers,
 });
 
 export default rootReducer;

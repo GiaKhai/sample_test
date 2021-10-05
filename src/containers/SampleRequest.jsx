@@ -4,7 +4,7 @@ import FormSample from "components/FormSample";
 import { getCookie } from "utils/getCookie";
 import { getSampleRequest } from "actions/sample-request.action";
 
-const SampleRequest = ({ setIsModalVisible, show }) => {
+const SampleRequest = ({ setIsModalVisible, show, setSampleIdClick }) => {
   let token = getCookie("token");
   const dispatch = useDispatch();
   const sampleList = useSelector(
@@ -20,6 +20,7 @@ const SampleRequest = ({ setIsModalVisible, show }) => {
       show={show}
       sampleList={sampleList}
       setIsModalVisible={setIsModalVisible}
+      setSampleIdClick={setSampleIdClick}
     />
   );
 };

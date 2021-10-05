@@ -3,6 +3,7 @@ import Moment from "react-moment";
 import AddUser from "containers/AddUser";
 import { SearchOutlined } from "@ant-design/icons";
 import { Table, Button, Switch, Input } from "antd";
+import { useForm } from "antd/lib/form/Form";
 
 import "../style.css";
 
@@ -17,6 +18,7 @@ const Administration = ({
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const typingTimeoutRef = useRef(null);
+  const [form] = useForm();
 
   const onsubmit = (newfilter) => {
     setFilter(newfilter);
@@ -48,6 +50,7 @@ const Administration = ({
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    form.resetFields();
   };
 
   const columns = [
@@ -59,6 +62,10 @@ const Administration = ({
       fixed: "left",
       width: 70,
       render: (_, __, index) => index + 1,
+      sorter: {
+        compare: (a, b) => a.index - b.index,
+        multiple: 1,
+      },
     },
     {
       key: "first_name",
@@ -66,7 +73,7 @@ const Administration = ({
       dataIndex: "first_name",
       align: "center",
       fixed: "left",
-      width: 105,
+      width: 110,
     },
     {
       key: "last_name",
@@ -80,7 +87,7 @@ const Administration = ({
       title: "Title",
       dataIndex: "title",
       align: "center",
-      width: 120,
+      width: 130,
     },
     { key: "email", title: "Email", dataIndex: "email", align: "center" },
     {
@@ -146,7 +153,11 @@ const Administration = ({
         columns={columns}
         dataSource={userList}
         bordered={true}
-        pagination={{ pageSize: 10 }}
+        pagination={{
+          pageSizeOptions: ["5", "10"],
+          showSizeChanger: true,
+          defaultPageSize: 5,
+        }}
         scroll={{ x: 1000 }}
         rowKey={(item) => item.id}
       />
@@ -155,7 +166,11 @@ const Administration = ({
         <Button className="btn-admin" onClick={showModal} type="primary">
           Add User
         </Button>
-        <AddUser isModalVisible={isModalVisible} handleCancel={handleCancel} />
+        <AddUser
+          isModalVisible={isModalVisible}
+          handleCancel={handleCancel}
+          form={form}
+        />
         <Button
           className="btn-admin"
           type="primary"

@@ -49,8 +49,8 @@ export const postUserAction = async (body) => {
       Message.success("Add success");
       return { success: true };
     }
-    console.log(test);
   } catch (error) {
+    console.log(error);
     Message.error(error.response.data.email[0]);
     return { success: false };
   }

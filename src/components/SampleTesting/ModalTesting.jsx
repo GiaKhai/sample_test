@@ -11,10 +11,10 @@ import {
   Button,
 } from "antd";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getCookie } from "utils/getCookie.js";
-import { getTest } from "actions/sample-request.action.js";
-import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
+// import { getCookie } from "utils/getCookie.js";
+// import { getTest } from "actions/sample-request.action.js";
+// import { useEffect } from "react";
 
 const validateMessages = {
   required: "$Please input!",
@@ -56,21 +56,19 @@ const EditableCell = ({
 };
 
 const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
-  let token = getCookie("token");
-  const dispatch = useDispatch();
+  // let token = getCookie("token");
+  // const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [data, setData] = useState([]);
   const [editingKey, setEditingKey] = useState("");
-  useEffect(() => {
-    dispatch(getTest(token));
-  }, [dispatch, token]);
-  const testList = useSelector((state) => state.testReducers.testList.results);
-  // console.log(testList);
+  // useEffect(() => {
+  //   dispatch(getTest(token));
+  // }, [dispatch, token]);
+  // const testList = useSelector((state) => state.testReducers.testList.results);
 
-  useEffect(() => {
-    console.log(testList);
-    setData(testList);
-  }, [testList]);
+  // useEffect(() => {
+  //   setData(testList);
+  // }, [testList]);
 
   const isEditing = (record) => record.id === editingKey;
 
@@ -82,7 +80,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
       ...record,
     });
     setEditingKey(record.id);
-    console.log(record);
+    // console.log(record);
   };
 
   const cancel = () => {
@@ -147,7 +145,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
       title: "Action",
       dataIndex: "operation",
       render: (_, record) => {
-        console.log(record);
+        // console.log(record);
         const editable = isEditing(record);
         return editable ? (
           <span>
@@ -262,6 +260,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input customer name",
                       },
                     ]}
                   >
@@ -272,6 +271,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input requetor",
                       },
                     ]}
                   >
@@ -302,6 +302,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input product",
                       },
                     ]}
                   >
@@ -322,6 +323,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input Sample Source/ Description",
                       },
                     ]}
                   >
@@ -332,6 +334,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input sample container",
                       },
                     ]}
                   >
@@ -342,6 +345,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input Batch/ Lot No",
                       },
                     ]}
                   >
@@ -352,6 +356,7 @@ const ModalTesting = ({ isModalVisible, handleOk, handleCancel }) => {
                     rules={[
                       {
                         required: true,
+                        message: "Please input plant/ location",
                       },
                     ]}
                   >

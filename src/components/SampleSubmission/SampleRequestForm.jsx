@@ -2,21 +2,23 @@ import React, { useState } from "react";
 import "../style.css";
 import FormSample from "containers/SampleRequest";
 import { Button } from "antd";
-import ModalAddSample from "./ModalAddSample";
+import ModalAddSample from "containers/AddSample";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import { useForm } from "antd/lib/form/Form";
 
 const SampleRequestForm = () => {
   const [visibleAdd, setVisibleAdd] = useState(false);
+  const [data, setData] = useState();
+  const [form] = useForm();
 
   const showModal = () => {
     setVisibleAdd(true);
   };
-  const handleOk = () => {
-    setVisibleAdd(false);
-  };
 
   const handleCancel = () => {
     setVisibleAdd(false);
+    setData([]);
+    form.resetFields();
   };
 
   return (
@@ -35,7 +37,9 @@ const SampleRequestForm = () => {
       <ModalAddSample
         visibleAdd={visibleAdd}
         handleCancel={handleCancel}
-        handleOk={handleOk}
+        data={data}
+        setData={setData}
+        form={form}
       />
       <FormSample />
     </div>

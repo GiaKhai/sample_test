@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
             <Link to="/sample-testing">Sample Testing</Link>
           </Menu.Item>
           <Menu.Item key="3">
-            <Link to="/worksheet">Sample Approval</Link>
+            <Link to="/sample-approval">Sample Approval</Link>
           </Menu.Item>
           <Menu.Item key="4">
             <Link to="/completed-sample-history">Completed Sample History</Link>

@@ -4,6 +4,7 @@ import ModalTesting from "./ModalTesting.jsx";
 
 const SampleTesting = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [sampleIdClick, setSampleIdClick] = useState("");
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -11,12 +12,17 @@ const SampleTesting = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  console.log(sampleIdClick);
 
   return (
     <div className="container">
       <h1 className="title">Sample Testing</h1>
 
-      <FormSample setIsModalVisible={setIsModalVisible} show />
+      <FormSample
+        setIsModalVisible={setIsModalVisible}
+        setSampleIdClick={setSampleIdClick}
+        show
+      />
 
       <ModalTesting
         isModalVisible={isModalVisible}

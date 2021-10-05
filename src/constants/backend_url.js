@@ -12,8 +12,6 @@ export const userURL = "/api/users/";
 
 export const userStatusURL = "/api/users/status/";
 
-export const sampleRequestURL = "/api/sample-request/";
+export const sampleRequestURL = "/api/sample/";
 
-export const sampleRequestStatusURL = "/api/sample-request/status/";
-
-export const testURL = "/api/test/";
+export const worksheetURL = "/api/worksheet/";

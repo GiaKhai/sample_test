@@ -1,14 +1,13 @@
 import React from "react";
-import FormSample from "./FormSample";
 import { Button } from "antd";
+
+import FormSample from "containers/SampleRequest";
 
 const CompletedSampleHistory = () => {
   return (
-    <>
-      <div>
-        <h1 className="title">Completed Sample History</h1>
-        <FormSample />
-      </div>
+    <div className="container">
+      <h1 className="title">Completed Sample History</h1>
+      <FormSample />
       <div className="btn-down">
         <Button className="down-ws" type="primary">
           Download Worksheet
@@ -17,7 +16,7 @@ const CompletedSampleHistory = () => {
           Download Report
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

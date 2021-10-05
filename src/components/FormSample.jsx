@@ -161,7 +161,7 @@ const columns = [
   },
   {
     title: "Comments",
-    dataIndex: "Comments",
+    dataIndex: "comments",
     key: "comments",
     width: 110,
     align: "center",
@@ -175,7 +175,12 @@ const columns = [
   },
 ];
 
-const FormSample = ({ sampleList, setIsModalVisible, show }) => {
+const FormSample = ({
+  sampleList,
+  setIsModalVisible,
+  show,
+  setSampleIdClick,
+}) => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const typingTimeoutRef = useRef(null);
@@ -220,14 +225,18 @@ const FormSample = ({ sampleList, setIsModalVisible, show }) => {
           columns={columns}
           dataSource={sampleList}
           bordered={true}
-          pagination={{ pageSize: 10 }}
+          pagination={{
+            pageSizeOptions: ["5", "10", "15"],
+            showSizeChanger: true,
+            defaultPageSize: 5,
+          }}
           scroll={{ x: 2000 }}
           rowKey={(item) => item.id}
-          onRow={(record, rowIndex) => {
+          onRow={(record) => {
             return {
               onClick: (event) => {
-                console.log(record.id);
                 show && setIsModalVisible(true);
+                // setSampleIdClick(record.sample_request_id);
               }, // click row
             };
           }}

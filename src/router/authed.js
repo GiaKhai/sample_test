@@ -5,11 +5,11 @@ import Header from "../components/Header";
 import { Layout } from "antd";
 
 import SampleRequestForm from "../components/SampleSubmission/SampleRequestForm";
-import CompletedSampleHistory from "../components/CompletedSampleHistory.jsx";
+import CompletedSampleHistory from "../components/SampleComplete/CompletedSampleHistory.jsx";
 import User from "../containers/User.jsx";
-import ProductQualityReport from "../components/ProductQualityReport";
 import SampleTesting from "../components/SampleTesting/SampleTesting";
 import PageNotFound from "components/NotFound";
+import SampleApproval from "components/SampleApproval/SampleApproval";
 
 const { Content } = Layout;
 
@@ -27,15 +27,14 @@ const Authed = () => {
             <Route exact path="/sample-testing">
               <SampleTesting />
             </Route>
+            <Route exact path="/sample-approval">
+              <SampleApproval />
+            </Route>
             <Route exact path="/completed-sample-history">
               <CompletedSampleHistory />
             </Route>
             <Route exact path="/administration">
               <User />
-            </Route>
-
-            <Route exact path="/product-quality-report">
-              <ProductQualityReport />
             </Route>
             <Route path="*">
               <PageNotFound />

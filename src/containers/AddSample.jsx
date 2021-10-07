@@ -4,7 +4,14 @@ import {
 } from "actions/sample-request.action";
 import ModalAddSample from "components/SampleSubmission/ModalAddSample";
 
-const AddSample = ({ visibleAdd, handleCancel, setData, data, form }) => {
+const AddSample = ({
+  visibleAdd,
+  handleCancel,
+  setData,
+  data,
+  form,
+  setVisibleAdd,
+}) => {
   const handleSubmit = async () => {
     try {
       await form.validateFields();
@@ -14,6 +21,7 @@ const AddSample = ({ visibleAdd, handleCancel, setData, data, form }) => {
       if (success) {
         form.resetFields();
         setData([]);
+        setVisibleAdd(false);
       }
     } catch (error) {}
   };

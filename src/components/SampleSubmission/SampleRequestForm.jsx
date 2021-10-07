@@ -40,6 +40,7 @@ const SampleRequestForm = () => {
         data={data}
         setData={setData}
         form={form}
+        setVisibleAdd={setVisibleAdd}
       />
       <FormSample />
     </div>

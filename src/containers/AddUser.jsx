@@ -1,16 +1,15 @@
 import ModalAddUser from "components/Admin/ModalAddUser";
 import { postUserAction } from "actions/user.action";
 
-const AddUser = ({ isModalVisible, handleCancel, form }) => {
+const AddUser = ({ isModalVisible, handleCancel, form, setIsModalVisible }) => {
   const handleSubmit = async () => {
     try {
       await form.validateFields();
       let body = form.getFieldsValue();
       const { success } = await postUserAction(body);
       if (success) form.resetFields();
-    } catch (errorInfo) {
-      console.log("Failed:", errorInfo);
-    }
+      setIsModalVisible(false);
+    } catch (error) {}
   };
 
   return (

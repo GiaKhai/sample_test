@@ -167,6 +167,7 @@ const Administration = ({
           Add User
         </Button>
         <AddUser
+          setIsModalVisible={setIsModalVisible}
           isModalVisible={isModalVisible}
           handleCancel={handleCancel}
           form={form}

@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { Layout } from "antd";
 
-// import SampleRequestForm from "../components/SampleSubmission/SampleRequestForm";
+import SampleRequestForm from "../components/SampleSubmission/SampleRequestForm";
 import CompletedSampleHistory from "../components/SampleComplete/CompletedSampleHistory.jsx";
 import User from "../containers/User.jsx";
 import SampleTesting from "../components/SampleTesting/SampleTesting";
@@ -34,12 +34,12 @@ const Authed = () => {
         <Header />
         <Content>
           <Switch>
-            {/* <Route exact path="/">
-              <SampleRequestForm />
-            </Route> */}
             <Route exact path="/">
-              <ExportPDF />
+              <SampleRequestForm />
             </Route>
+            {/* <Route exact path="/">
+              <ExportPDF />
+            </Route> */}
             <Route exact path="/sample-testing">
               <SampleTesting />
             </Route>

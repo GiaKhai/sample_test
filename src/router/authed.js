@@ -11,11 +11,20 @@ import SampleTesting from "../components/SampleTesting/SampleTesting";
 import PageNotFound from "components/NotFound";
 import SampleApproval from "components/SampleApproval/SampleApproval";
 // import ExportPDF from "components/export/ExportPDF";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie } from "utils/getCookie";
+import { useEffect } from "react";
+import { getMeAction } from "actions/me.action";
 
 const { Content } = Layout;
 
 const Authed = () => {
+  let token = getCookie("token");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMeAction(token));
+  }, [dispatch, token]);
   const me = useSelector((state) => state.meReducers.me.access_level);
 
   return (

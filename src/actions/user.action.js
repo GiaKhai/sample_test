@@ -50,7 +50,6 @@ export const postUserAction = async (body) => {
       return { success: true };
     }
   } catch (error) {
-    console.log(error);
     Message.error(error.response.data.email[0]);
     return { success: false };
   }

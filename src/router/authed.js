@@ -10,7 +10,7 @@ import User from "../containers/User.jsx";
 import SampleTesting from "../components/SampleTesting/SampleTesting";
 import PageNotFound from "components/NotFound";
 import SampleApproval from "components/SampleApproval/SampleApproval";
-import ExportPDF from "components/export/ExportPDF";
+// import ExportPDF from "components/export/ExportPDF";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "utils/getCookie";
 import { useEffect } from "react";

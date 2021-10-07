@@ -193,12 +193,12 @@ const FormSample = ({
   setSampleIdClick,
 }) => {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("");
+  // const [filter, setFilter] = useState("");
   const typingTimeoutRef = useRef(null);
 
-  const onsubmit = (newfilter) => {
-    setFilter(newfilter);
-  };
+  // const onsubmit = (newfilter) => {
+  //   setFilter(newfilter);
+  // };
 
   const handleChange = (e) => {
     const value = e.target.value;

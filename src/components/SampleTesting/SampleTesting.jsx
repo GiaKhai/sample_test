@@ -42,7 +42,7 @@ const SampleTesting = () => {
       results: data,
     };
 
-    // console.log(body);
+    console.log(body);
   };
 
   const handleCancel = () => {

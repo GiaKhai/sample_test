@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Modal,
   Form,
@@ -9,17 +10,8 @@ import {
   Popconfirm,
   Typography,
   Button,
+  DatePicker,
 } from "antd";
-// import { useSelector } from "react-redux";
-
-// import { useDispatch } from "react-redux";
-// import { getCookie } from "utils/getCookie.js";
-// import { getTest } from "actions/sample-request.action.js";
-// import { useEffect } from "react";
-
-const validateMessages = {
-  required: "$Please input!",
-};
 
 const EditableCell = ({
   editing,
@@ -60,34 +52,17 @@ const ModalTesting = ({
   isModalVisible,
   handleOk,
   handleCancel,
-  sampleIdClick,
+  data,
+  form,
+  setData,
+  formTable,
 }) => {
-  const [form] = Form.useForm();
-  const [data, setData] = useState();
   const [editingKey, setEditingKey] = useState("");
-
-  // const sampleList = useSelector(
-  //   (state) => state.sampleReducers.sampleList.results
-  // );
-  // console.log(sampleIdClick);
-
-  // const test = sampleList?.find(
-  //   (item) => item.sample_request_id === sampleIdClick
-  // );
-
-  // setData(test.results);
-
-  // console.log(test);
-
-  // useEffect(() => {
-  //   setData(testList);
-  // }, [testList]);
 
   const isEditing = (record) => record.id === editingKey;
 
   const edit = (record) => {
-    form.setFieldsValue({
-      id: "",
+    formTable.setFieldsValue({
       result: "",
       initial: "",
       ...record,
@@ -102,9 +77,10 @@ const ModalTesting = ({
 
   const save = async (key) => {
     try {
-      const row = await form.validateFields();
+      const row = await formTable.validateFields();
       const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
+      const index = newData.findIndex((item) => key === item.id);
+      console.log(key, index);
 
       if (index > -1) {
         const item = newData[index];
@@ -126,21 +102,33 @@ const ModalTesting = ({
       title: "TEST",
       dataIndex: "test",
       key: "test",
+      render: (_, record) => {
+        return record?.test?.test;
+      },
     },
     {
       title: "UNIT",
       dataIndex: "unit",
       key: "unit",
+      render: (_, record) => {
+        return record?.test?.unit;
+      },
     },
     {
       title: "METHOD",
       dataIndex: "method",
       key: "method",
+      render: (_, record) => {
+        return record?.test?.method;
+      },
     },
     {
       title: "SPEC",
       dataIndex: "spect",
       key: "spect",
+      render: (_, record) => {
+        return record?.test?.spect;
+      },
     },
     {
       title: "RESULT",
@@ -158,13 +146,14 @@ const ModalTesting = ({
       title: "Action",
       dataIndex: "operation",
       render: (_, record) => {
-        // console.log(record);
         const editable = isEditing(record);
         return editable ? (
           <span>
             <Button
               // href="javascript:;"
-              onClick={() => save(record.key)}
+              onClick={() => {
+                save(record.id);
+              }}
               style={{
                 marginRight: 8,
               }}
@@ -179,7 +168,10 @@ const ModalTesting = ({
         ) : (
           <Typography.Link
             disabled={editingKey !== ""}
-            onClick={() => edit(record)}
+            onClick={() => {
+              // console.log(record);
+              edit(record);
+            }}
           >
             Edit
           </Typography.Link>
@@ -213,63 +205,20 @@ const ModalTesting = ({
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div className="form-input-product">
-          <div className=" data-sample-request">
-            <Form
-              labelCol={{ span: 10 }}
-              wrapperCol={{ span: 18 }}
-              name="nest-messages"
-              validateMessages={validateMessages}
-            >
+        <Form
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 12 }}
+          name="nest-messages"
+          form={form}
+        >
+          <div className="form-input-product">
+            <h1 className="title">Product Quality Report</h1>
+            <div className="data-sample-request">
               <Row>
-                <Col xs={{ span: 0 }} lg={{ span: 15 }}></Col>
-                <Col xs={{ span: 24 }} lg={{ span: 8 }}>
-                  <Form.Item
-                    label="Reference No:"
-                    rules={[
-                      {
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Page No"
-                    rules={[
-                      {
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                  <Form.Item
-                    label="Date Reported"
-                    rules={[
-                      {
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </Form>
-          </div>
-          <h1 className="title">Product Quality Report</h1>
-          <div className="data-sample-request">
-            <Form
-              labelCol={{ span: 10 }}
-              wrapperCol={{ span: 10 }}
-              name="nest-messages"
-              validateMessages={validateMessages}
-            >
-              <Row>
-                <Col xs={{ span: 24 }} lg={{ span: 15 }}>
+                <Col xs={{ span: 24 }} lg={{ span: 20 }}>
                   <Form.Item
                     label="Customer Name"
+                    name="customer"
                     rules={[
                       {
                         required: true,
@@ -281,6 +230,7 @@ const ModalTesting = ({
                   </Form.Item>
                   <Form.Item
                     label="Requestor"
+                    name="requestor"
                     rules={[
                       {
                         required: true,
@@ -292,26 +242,29 @@ const ModalTesting = ({
                   </Form.Item>
                   <Form.Item
                     label="Sample Received Date"
+                    name="receivedDate"
                     rules={[
                       {
                         required: true,
                       },
                     ]}
                   >
-                    <Input />
+                    <DatePicker />
                   </Form.Item>
                   <Form.Item
                     label="Date Tested"
+                    name="dateTested"
                     rules={[
                       {
                         required: true,
                       },
                     ]}
                   >
-                    <Input />
+                    <DatePicker />
                   </Form.Item>
                   <Form.Item
                     label="Product"
+                    name="product"
                     rules={[
                       {
                         required: true,
@@ -323,16 +276,18 @@ const ModalTesting = ({
                   </Form.Item>
                   <Form.Item
                     label="Sample Date"
+                    name="sampleDate"
                     rules={[
                       {
                         required: true,
                       },
                     ]}
                   >
-                    <Input />
+                    <DatePicker />
                   </Form.Item>
                   <Form.Item
                     label="Sample Source/ Description"
+                    name="description"
                     rules={[
                       {
                         required: true,
@@ -344,6 +299,7 @@ const ModalTesting = ({
                   </Form.Item>
                   <Form.Item
                     label="Sample Container"
+                    name="sampleContainer"
                     rules={[
                       {
                         required: true,
@@ -355,6 +311,7 @@ const ModalTesting = ({
                   </Form.Item>
                   <Form.Item
                     label="Batch/ Lot No"
+                    name="batch"
                     rules={[
                       {
                         required: true,
@@ -366,6 +323,7 @@ const ModalTesting = ({
                   </Form.Item>
                   <Form.Item
                     label="Plant/ Location"
+                    name="plant"
                     rules={[
                       {
                         required: true,
@@ -377,48 +335,45 @@ const ModalTesting = ({
                   </Form.Item>
                 </Col>
               </Row>
-            </Form>
+            </div>
+            <div className="table-wordsheet">
+              <Form form={formTable} component={false}>
+                <Table
+                  components={{
+                    body: {
+                      cell: EditableCell,
+                    },
+                  }}
+                  bordered
+                  dataSource={data}
+                  columns={mergedColumns}
+                  rowClassName="editable-row"
+                  pagination={false}
+                  rowKey={(item) => {
+                    return item.id;
+                  }}
+                />
+              </Form>
+            </div>
+            <div className="data-sample-request">
+              <Row>
+                <Col xs={{ span: 24 }} lg={{ span: 20 }}>
+                  <Form.Item
+                    label="Remarks"
+                    name="remarks"
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <Input.TextArea />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </div>
           </div>
-          <div className="table-wordsheet">
-            <Form form={form} component={false}>
-              <Table
-                components={{
-                  body: {
-                    cell: EditableCell,
-                  },
-                }}
-                bordered
-                dataSource={data}
-                columns={mergedColumns}
-                rowClassName="editable-row"
-                pagination={false}
-                rowKey={(item) => {
-                  // console.log(item.id);
-                  return item.id;
-                }}
-              />
-            </Form>
-          </div>
-          <div className="data-sample-request">
-            <Form
-              labelCol={{ span: 3 }}
-              name="nest-messages"
-              validateMessages={validateMessages}
-            >
-              <Form.Item
-                label="Remarks"
-                name="remarks"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input.TextArea />
-              </Form.Item>
-            </Form>
-          </div>
-        </div>
+        </Form>
       </Modal>
     </>
   );

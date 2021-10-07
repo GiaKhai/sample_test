@@ -87,9 +87,9 @@
   margin: 20px 0;
   font-size: larger;
 }
-
-.ant-col {
-  text-align: center !important;
+.ant-layout-sider-zero-width-trigger {
+  background: #096dd9;
+  top: 12px
 }
 
 .btn-admin {

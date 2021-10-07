@@ -40,9 +40,9 @@ const Sidebar = () => {
                 Completed Sample History
               </Link>
             </Menu.Item>
-            <Menu.Item key="5">
+            {/* <Menu.Item key="5">
               <Link to="/">Audit Trail</Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="6">
               <Link to="/administration">Administration</Link>
             </Menu.Item>

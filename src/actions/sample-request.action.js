@@ -96,3 +96,27 @@ export const postSampleRequest = async (body) => {
     return { success: false };
   }
 };
+
+export const sampleTetingAction = async (body) => {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      `${baseURL}${sampleRequestURL}`,
+      body,
+      config
+    );
+    if (response.status === 201) {
+      Message.success("Add success");
+      return { success: true };
+    }
+  } catch (error) {
+    Message.error("Error");
+    console.log(error);
+    return { success: false };
+  }
+};

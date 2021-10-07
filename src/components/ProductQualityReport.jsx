@@ -200,7 +200,6 @@ const ProductQualityReport = () => {
         </div>
         <div className="table-wordsheet">
           <Table
-            className
             columns={columns}
             dataSource={data}
             bordered={true}

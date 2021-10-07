@@ -10,6 +10,7 @@ import User from "../containers/User.jsx";
 import SampleTesting from "../components/SampleTesting/SampleTesting";
 import PageNotFound from "components/NotFound";
 import SampleApproval from "components/SampleApproval/SampleApproval";
+// import ExportPDF from "components/export/ExportPDF";
 import { useSelector } from "react-redux";
 
 const { Content } = Layout;
@@ -27,6 +28,9 @@ const Authed = () => {
             <Route exact path="/">
               <SampleRequestForm />
             </Route>
+            {/* <Route exact path="/">
+              <ExportPDF />
+            </Route> */}
             <Route exact path="/sample-testing">
               <SampleTesting />
             </Route>

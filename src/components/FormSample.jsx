@@ -39,10 +39,10 @@ const columns = [
     key: "worksheet",
     width: 110,
     align: "center",
-    sorter: {
-      compare: (a, b) => a.worksheet - b.worksheet,
-      multiple: 1,
-    },
+    // sorter: {
+    //   compare: (a, b) => a.worksheet - b.worksheet,
+    //   multiple: 1,
+    // },
   },
   {
     title: "Test Description",
@@ -169,7 +169,18 @@ const columns = [
   {
     title: "Action",
     key: "action",
-    render: () => <Button type="primary">Export</Button>,
+    render: (_, record) => {
+      return (
+        <Button
+          type="primary"
+          onClick={() => {
+            console.log(record.sample_request_id);
+          }}
+        >
+          Export
+        </Button>
+      );
+    },
     width: 30,
     align: "center",
   },

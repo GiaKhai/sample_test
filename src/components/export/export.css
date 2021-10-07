@@ -1,0 +1,46 @@
+.container {
+    padding: 5% 12%;
+}
+.title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    padding: 20px 0;
+}
+.form-header {
+    float: right;
+}
+
+/* table,
+th,
+td {
+    border: 1px solid black;
+    width: 100px;
+} */
+
+table {
+    width: 300px;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 650;
+}
+.content {
+    font-size: 16px;
+    font-weight: 400;
+
+}
+.table {
+    margin: 20px 0;
+}
+
+.title-table {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.singned {
+    text-align: center;
+    font-size: 25px;
+}

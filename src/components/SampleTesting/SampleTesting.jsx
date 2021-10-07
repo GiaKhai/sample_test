@@ -66,7 +66,7 @@ const SampleTesting = () => {
       });
 
     setData(test?.results);
-  }, [test]);
+  }, [test, form]);
 
   return (
     <div className="container">

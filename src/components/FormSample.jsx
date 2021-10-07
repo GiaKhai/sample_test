@@ -174,7 +174,7 @@ const columns = [
         <Button
           type="primary"
           onClick={() => {
-            console.log(record.sample_request_id);
+            // console.log(record.sample_request_id);
           }}
         >
           Export
@@ -198,7 +198,6 @@ const FormSample = ({
 
   const onsubmit = (newfilter) => {
     setFilter(newfilter);
-    console.log(filter);
   };
 
   const handleChange = (e) => {

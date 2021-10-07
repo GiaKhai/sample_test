@@ -13,7 +13,6 @@ const User = () => {
   const token = getCookie("token");
 
   const userList = useSelector((state) => state.userReducers.userList);
-  console.log(userList);
   // userList.sort((a, b) => a.id - b.id); //sort id
 
   useEffect(() => {
@@ -64,10 +63,8 @@ const User = () => {
       count !== 0
     ) {
       setCheckStatusUsers("Active");
-      console.log("ngu");
     } else if (result && count === 0 && selectedRowKeys.length !== 0) {
       setCheckStatusUsers("Suspended");
-      console.log("nguuuu");
     } else if (result && count === selectedRows.length && count !== 0)
       setCheckStatusUsers("all");
     else setCheckStatusUsers("other");

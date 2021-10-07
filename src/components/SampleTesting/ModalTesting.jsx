@@ -80,7 +80,7 @@ const ModalTesting = ({
       const row = await formTable.validateFields();
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.id);
-      console.log(key, index);
+      // console.log(key, index);
 
       if (index > -1) {
         const item = newData[index];

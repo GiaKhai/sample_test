@@ -92,7 +92,6 @@ export const postSampleRequest = async (body) => {
     }
   } catch (error) {
     Message.error("Error");
-    console.log(error);
     return { success: false };
   }
 };
@@ -116,7 +115,6 @@ export const sampleTetingAction = async (body) => {
     }
   } catch (error) {
     Message.error("Error");
-    console.log(error);
     return { success: false };
   }
 };

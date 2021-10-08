@@ -204,7 +204,6 @@ const ModalAddSample = ({
                   <Select style={{ width: 162 }} onSelect={onselect}>
                     {worksheetList?.length > 0 &&
                       worksheetList.map((list) => {
-                        // console.log(list);
                         return (
                           <Option value={list.id} key={list.id}>
                             {list.name}

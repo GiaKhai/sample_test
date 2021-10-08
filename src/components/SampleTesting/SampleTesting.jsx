@@ -63,6 +63,7 @@ const SampleTesting = () => {
         customer: test.client_name,
         requestor: test.owner_name,
         description: test.sample_description,
+        // receivedDate: test.received_date,
       });
 
     setData(test?.results);

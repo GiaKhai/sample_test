@@ -1,102 +1,101 @@
 import React, { useState } from "react";
+import { Modal, Form, Input, Row, Col, Table, DatePicker } from "antd";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { useRef } from "react";
 
-import {
-  Modal,
-  Form,
-  Input,
-  Row,
-  Col,
-  Table,
-  Popconfirm,
-  Typography,
-  Button,
-  DatePicker,
-} from "antd";
+const EditableContext = React.createContext(null);
+
+const EditableRow = ({ index, ...props }) => {
+  const [form] = Form.useForm();
+  return (
+    <Form form={form} component={false}>
+      <EditableContext.Provider value={form}>
+        <tr {...props} />
+      </EditableContext.Provider>
+    </Form>
+  );
+};
 
 const EditableCell = ({
-  editing,
-  dataIndex,
   title,
-  inputType,
-  record,
-  index,
+  editable,
   children,
+  dataIndex,
+  record,
+  handleSave,
   ...restProps
 }) => {
-  const inputNode = <Input />;
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{
-            margin: 0,
-          }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
+  const [editing, setEditing] = useState(false);
+  const inputRef = useRef(null);
+  const form = useContext(EditableContext);
+  useEffect(() => {
+    if (editing) {
+      inputRef.current.focus();
+    }
+  }, [editing]);
+
+  const toggleEdit = () => {
+    setEditing(!editing);
+    // setEditing(true);
+
+    form.setFieldsValue({
+      [dataIndex]: record[dataIndex],
+    });
+  };
+
+  const save = async () => {
+    try {
+      const values = await form.validateFields();
+      toggleEdit();
+      handleSave({ ...record, ...values });
+    } catch (errInfo) {
+      console.log("Save failed:", errInfo);
+    }
+  };
+
+  let childNode = children;
+
+  if (editable) {
+    childNode = editing ? (
+      <Form.Item
+        style={{
+          margin: 0,
+        }}
+        name={dataIndex}
+        rules={[
+          {
+            required: true,
+            message: `${title} is required.`,
+          },
+        ]}
+      >
+        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+      </Form.Item>
+    ) : (
+      <div
+        className="editable-cell-value-wrap"
+        style={{
+          paddingRight: 24,
+        }}
+        onClick={toggleEdit}
+      >
+        {children}
+      </div>
+    );
+  }
+
+  return <td {...restProps}>{childNode}</td>;
 };
 
 const ModalTesting = ({
   isModalVisible,
   handleOk,
   handleCancel,
-  data,
   form,
+  data,
   setData,
-  formTable,
 }) => {
-  const [editingKey, setEditingKey] = useState("");
-
-  const isEditing = (record) => record.id === editingKey;
-
-  const edit = (record) => {
-    formTable.setFieldsValue({
-      result: "",
-      initial: "",
-      ...record,
-    });
-    setEditingKey(record.id);
-    // console.log(record);
-  };
-
-  const cancel = () => {
-    setEditingKey("");
-  };
-
-  const save = async (key) => {
-    try {
-      const row = await formTable.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.id);
-      // console.log(key, index);
-
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        setData(newData);
-        setEditingKey("");
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey("");
-      }
-    } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
-    }
-  };
-
   const columns = [
     {
       title: "TEST",
@@ -142,56 +141,35 @@ const ModalTesting = ({
       key: "initial",
       editable: true,
     },
-    {
-      title: "Action",
-      dataIndex: "operation",
-      render: (_, record) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Button
-              // href="javascript:;"
-              onClick={() => {
-                save(record.id);
-              }}
-              style={{
-                marginRight: 8,
-              }}
-              size="small"
-            >
-              Save
-            </Button>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <Button size="small">Cancel</Button>
-            </Popconfirm>
-          </span>
-        ) : (
-          <Typography.Link
-            disabled={editingKey !== ""}
-            onClick={() => {
-              // console.log(record);
-              edit(record);
-            }}
-          >
-            Edit
-          </Typography.Link>
-        );
-      },
-    },
   ];
+  const handleSave = (row) => {
+    const newData = [...data];
+    const index = newData.findIndex((item) => row.id === item.id);
+    const item = newData[index];
+    newData.splice(index, 1, { ...item, ...row });
+    // setData((data) => [...data, newData]);
+    setData(newData);
+  };
 
-  const mergedColumns = columns.map((col) => {
+  const components = {
+    body: {
+      row: EditableRow,
+      cell: EditableCell,
+    },
+  };
+  const column = columns.map((col) => {
     if (!col.editable) {
       return col;
     }
+
     return {
       ...col,
       onCell: (record) => ({
         record,
-        inputType: col.dataIndex,
+        editable: col.editable,
         dataIndex: col.dataIndex,
         title: col.title,
-        editing: isEditing(record),
+        handleSave: handleSave,
       }),
     };
   });
@@ -337,23 +315,16 @@ const ModalTesting = ({
               </Row>
             </div>
             <div className="table-wordsheet">
-              <Form form={formTable} component={false}>
-                <Table
-                  components={{
-                    body: {
-                      cell: EditableCell,
-                    },
-                  }}
-                  bordered
-                  dataSource={data}
-                  columns={mergedColumns}
-                  rowClassName="editable-row"
-                  pagination={false}
-                  rowKey={(item) => {
-                    return item.id;
-                  }}
-                />
-              </Form>
+              <Table
+                components={components}
+                rowClassName={() => "editable-row"}
+                bordered
+                dataSource={data}
+                columns={column}
+                rowKey={(item) => {
+                  return item.id;
+                }}
+              />
             </div>
             <div className="data-sample-request">
               <Row>

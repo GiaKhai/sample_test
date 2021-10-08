@@ -55,7 +55,6 @@ const User = () => {
     result.forEach((status) => {
       if (status === "Active") count++;
     });
-    console.log(selectedRowKeys);
     if (
       result &&
       count === result.length &&

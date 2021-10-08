@@ -3,6 +3,8 @@ import {
   postSampleRequest,
 } from "actions/sample-request.action";
 import ModalAddSample from "components/SampleSubmission/ModalAddSample";
+import { useDispatch } from "react-redux";
+import { getCookie } from "utils/getCookie";
 
 const AddSample = ({
   visibleAdd,
@@ -12,6 +14,9 @@ const AddSample = ({
   form,
   setVisibleAdd,
 }) => {
+  const dispatch = useDispatch();
+  let token = getCookie("token");
+
   const handleSubmit = async () => {
     try {
       await form.validateFields();
@@ -22,6 +27,7 @@ const AddSample = ({
         form.resetFields();
         setData([]);
         setVisibleAdd(false);
+        dispatch(getSampleRequest(token));
       }
     } catch (error) {}
   };

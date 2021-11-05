@@ -170,6 +170,7 @@ const ModalAddSample = ({
                   rules={[
                     {
                       required: true,
+                      message: "Please input comments",
                     },
                   ]}
                 >
@@ -181,6 +182,7 @@ const ModalAddSample = ({
                   rules={[
                     {
                       required: true,
+                      message: "Please input other",
                     },
                   ]}
                 >

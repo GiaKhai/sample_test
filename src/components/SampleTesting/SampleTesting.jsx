@@ -41,13 +41,14 @@ const SampleTesting = () => {
     };
 
     try {
+      await form.validateFields();
       const { success } = await sampleTetingAction(body, idUser);
       if (success) {
-        setIsModalVisible(true);
+        setIsModalVisible(false);
         form.resetFields();
       }
     } catch (error) {
-      setIsModalVisible(false);
+      setIsModalVisible(true);
     }
   };
 

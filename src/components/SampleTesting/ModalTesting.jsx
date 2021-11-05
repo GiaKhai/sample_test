@@ -230,6 +230,7 @@ const ModalTesting = ({
                     rules={[
                       {
                         required: true,
+                        message: "Please input date test",
                       },
                     ]}
                   >
@@ -321,6 +322,7 @@ const ModalTesting = ({
                     rules={[
                       {
                         required: true,
+                        message: "Please input remarks",
                       },
                     ]}
                   >

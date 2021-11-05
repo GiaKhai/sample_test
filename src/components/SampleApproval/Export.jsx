@@ -66,7 +66,7 @@ class ComponentToPrint extends React.PureComponent {
                   <td>Page No:</td>
                   <td>2</td>
                 </tr>
-                <td>Date reported</td>
+                <td>Date reported:</td>
                 <td>10/10/2000</td>
               </table>
             </div>

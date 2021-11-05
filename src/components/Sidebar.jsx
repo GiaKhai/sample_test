@@ -13,7 +13,7 @@ const Sidebar = () => {
   return (
     <Sider breakpoint="lg" collapsedWidth="0">
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["0"]}>
+      <Menu theme="dark" mode="inline">
         <Menu.Item key="1">
           <Link to="/">Sample Submission</Link>
         </Menu.Item>

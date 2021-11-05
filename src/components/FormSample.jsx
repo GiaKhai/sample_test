@@ -191,6 +191,7 @@ const FormSample = ({
   setIsModalVisible,
   show,
   setSampleIdClick,
+  setIdUser,
 }) => {
   const [search, setSearch] = useState("");
   // const [filter, setFilter] = useState("");
@@ -247,6 +248,7 @@ const FormSample = ({
               onClick: (event) => {
                 show && setIsModalVisible(true);
                 show && setSampleIdClick(record.sample_request_id);
+                show && setIdUser(record.id);
               }, // click row
             };
           }}

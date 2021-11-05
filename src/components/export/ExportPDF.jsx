@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Row, Col, Table } from "antd";
+import { Row, Col, Table, Button } from "antd";
 import { useReactToPrint } from "react-to-print";
 import "./export.css";
 
@@ -41,7 +41,7 @@ const columns = [
 class ComponentToPrint extends React.PureComponent {
   render() {
     return (
-      <div className="container">
+      <div className="container-pdf">
         <Row>
           <Col xs={{ span: 24 }}>
             <div className="form-header">
@@ -180,7 +180,14 @@ const Example = () => {
   return (
     <div>
       <ComponentToPrint ref={componentRef} />
-      <button onClick={handlePrint}>Export</button>
+      <Button
+        className="btn-pdf"
+        size="large"
+        onClick={handlePrint}
+        type="primary"
+      >
+        Export
+      </Button>
     </div>
   );
 };

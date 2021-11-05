@@ -1,8 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Modal, Form, Input, Row, Col, Table, DatePicker } from "antd";
-import { useEffect } from "react";
-import { useContext } from "react";
-import { useRef } from "react";
 
 const EditableContext = React.createContext(null);
 
@@ -37,8 +34,6 @@ const EditableCell = ({
 
   const toggleEdit = () => {
     setEditing(!editing);
-    // setEditing(true);
-
     form.setFieldsValue({
       [dataIndex]: record[dataIndex],
     });
@@ -227,7 +222,7 @@ const ModalTesting = ({
                       },
                     ]}
                   >
-                    <DatePicker />
+                    <Input disabled />
                   </Form.Item>
                   <Form.Item
                     label="Date Tested"
@@ -252,17 +247,7 @@ const ModalTesting = ({
                   >
                     <Input />
                   </Form.Item>
-                  <Form.Item
-                    label="Sample Date"
-                    name="sampleDate"
-                    rules={[
-                      {
-                        required: true,
-                      },
-                    ]}
-                  >
-                    <DatePicker />
-                  </Form.Item>
+
                   <Form.Item
                     label="Sample Source/ Description"
                     name="description"
@@ -317,6 +302,7 @@ const ModalTesting = ({
             <div className="table-wordsheet">
               <Table
                 components={components}
+                pagination={false}
                 rowClassName={() => "editable-row"}
                 bordered
                 dataSource={data}

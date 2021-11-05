@@ -96,7 +96,7 @@ export const postSampleRequest = async (body) => {
   }
 };
 
-export const sampleTetingAction = async (body) => {
+export const sampleTetingAction = async (body, id) => {
   let config = {
     headers: {
       Authorization: "Bearer " + token,
@@ -104,17 +104,17 @@ export const sampleTetingAction = async (body) => {
   };
 
   try {
-    const response = await axios.post(
-      `${baseURL}${sampleRequestURL}`,
+    const response = await axios.put(
+      `${baseURL}${sampleRequestURL}${id}/`,
       body,
       config
     );
     if (response.status === 201) {
-      Message.success("Add success");
+      Message.success("Testing success");
       return { success: true };
     }
   } catch (error) {
-    Message.error("Error");
+    Message.error("Please fill out completely");
     return { success: false };
   }
 };

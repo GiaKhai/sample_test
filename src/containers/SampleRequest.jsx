@@ -4,7 +4,12 @@ import FormSample from "components/FormSample";
 import { getCookie } from "utils/getCookie";
 import { getSampleRequest } from "actions/sample-request.action";
 
-const SampleRequest = ({ setIsModalVisible, show, setSampleIdClick }) => {
+const SampleRequest = ({
+  setIsModalVisible,
+  show,
+  setSampleIdClick,
+  setIdUser,
+}) => {
   let token = getCookie("token");
   const dispatch = useDispatch();
 
@@ -22,6 +27,7 @@ const SampleRequest = ({ setIsModalVisible, show, setSampleIdClick }) => {
       sampleList={sampleList}
       setIsModalVisible={setIsModalVisible}
       setSampleIdClick={setSampleIdClick}
+      setIdUser={setIdUser}
     />
   );
 };

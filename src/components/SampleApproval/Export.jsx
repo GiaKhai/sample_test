@@ -1,45 +1,57 @@
 import React, { useRef } from "react";
-import { Row, Col, Table, Button } from "antd";
+import Moment from "react-moment";
+import { Row, Col, Table, Modal } from "antd";
 import { useReactToPrint } from "react-to-print";
-import "./export.css";
-
-const columns = [
-  {
-    title: "TEST",
-    dataIndex: "test",
-    key: "test",
-  },
-  {
-    title: "UNIT",
-    dataIndex: "unit",
-    key: "unit",
-  },
-  {
-    title: "METHOD",
-    dataIndex: "method",
-    key: "method",
-  },
-  {
-    title: "SPEC",
-    dataIndex: "spect",
-    key: "spect",
-  },
-  {
-    title: "RESULTS",
-    dataIndex: "result",
-    key: "result",
-    editable: true,
-  },
-  {
-    title: "INITIAL",
-    dataIndex: "initial",
-    key: "initial",
-    editable: true,
-  },
-];
 
 class ComponentToPrint extends React.PureComponent {
   render() {
+    const columns = [
+      {
+        title: "TEST",
+        dataIndex: "test",
+        key: "test",
+        render: (_, record) => {
+          return record?.test?.test;
+        },
+      },
+      {
+        title: "UNIT",
+        dataIndex: "unit",
+        key: "unit",
+        render: (_, record) => {
+          return record?.test?.unit;
+        },
+      },
+      {
+        title: "METHOD",
+        dataIndex: "method",
+        key: "method",
+        render: (_, record) => {
+          return record?.test?.method;
+        },
+      },
+      {
+        title: "SPEC",
+        dataIndex: "spect",
+        key: "spect",
+        render: (_, record) => {
+          return record?.test?.spect;
+        },
+      },
+      {
+        title: "RESULT",
+        dataIndex: "result",
+        key: "result",
+        editable: true,
+      },
+      {
+        title: "INITIAL",
+        dataIndex: "initial",
+        key: "initial",
+        editable: true,
+      },
+    ];
+    console.log(this.props.testExport);
     return (
       <div className="container-pdf">
         <Row>
@@ -70,7 +82,7 @@ class ComponentToPrint extends React.PureComponent {
             Customer Name:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            Name
+            {this.props.testExport.client_name}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Requestor:
@@ -79,22 +91,30 @@ class ComponentToPrint extends React.PureComponent {
             Name
           </Col>
           <Col className="name" xs={{ span: 8 }}>
-            Sample Receoved Date:
+            Sample Received Date:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            13-12-2021
+            <Moment format="D MMM YYYY" withTitle>
+              {this.props.testExport.received_date}
+            </Moment>
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Date Tested:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            12-11-2021
+            {this.props.testExport.testing_date == null ? (
+              ""
+            ) : (
+              <Moment format="D MMM YYYY" withTitle>
+                {this.props.testExport.testing_date}
+              </Moment>
+            )}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Product:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            Name
+            {this.props.testExport.product}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Sample Date:
@@ -109,31 +129,31 @@ class ComponentToPrint extends React.PureComponent {
             Sample Source:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            ABC
+            {this.props.testExport.source}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Description:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            Other...
+            {this.props.testExport.sample_description}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Sample Container:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            ABH
+            {this.props.testExport.sample_contaier}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Batch/Lot No:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            ----
+            {this.props.testExport.batch}
           </Col>
           <Col className="name" xs={{ span: 8 }}>
             Plant/ Location:
           </Col>
           <Col className="content" xs={{ span: 16 }}>
-            VietNam11
+            {this.props.testExport.location}
           </Col>
         </Row>
         <Row>
@@ -144,45 +164,48 @@ class ComponentToPrint extends React.PureComponent {
               </div>
               <Table
                 columns={columns}
-                // dataSource={data}
+                dataSource={this.props.testExport.results}
                 bordered={true}
                 pagination={false}
               />
               <div className="title-table">
-                <span className="name">Remarks:</span> APHA-The results upon
-                anylysis obtained were as
+                <span className="name">Remarks:</span>
+                {this.props.testExport.remarks}
               </div>
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs={{ span: 12 }}>
-            <div className="singned">Singned</div>
+            <div className="singned"></div>
           </Col>
         </Row>
       </div>
     );
   }
 }
-const Example = () => {
+
+const Export = ({ isModalPdf, testExport, handleCancel }) => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
 
   return (
-    <div>
-      <ComponentToPrint ref={componentRef} />
-      <Button
-        className="btn-pdf"
-        size="large"
-        onClick={handlePrint}
-        type="primary"
-      >
-        Export
-      </Button>
-    </div>
+    <Modal
+      title="preview"
+      visible={isModalPdf}
+      width={1000}
+      closable={true}
+      onOk={handlePrint}
+      onCancel={handleCancel}
+      okText="Export"
+    >
+      <div>
+        <ComponentToPrint testExport={testExport} ref={componentRef} />
+      </div>
+    </Modal>
   );
 };
 
-export default Example;
+export default Export;

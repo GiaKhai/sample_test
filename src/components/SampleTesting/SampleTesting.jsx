@@ -49,8 +49,6 @@ const SampleTesting = () => {
     } catch (error) {
       setIsModalVisible(false);
     }
-
-    console.log(body);
   };
 
   const handleCancel = () => {

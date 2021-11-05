@@ -9,6 +9,8 @@ const SampleRequest = ({
   show,
   setSampleIdClick,
   setIdUser,
+  setSampleIdExport,
+  setIsModalPdf,
 }) => {
   let token = getCookie("token");
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ const SampleRequest = ({
       setIsModalVisible={setIsModalVisible}
       setSampleIdClick={setSampleIdClick}
       setIdUser={setIdUser}
+      setSampleIdExport={setSampleIdExport}
+      setIsModalPdf={setIsModalPdf}
     />
   );
 };

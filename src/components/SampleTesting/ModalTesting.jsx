@@ -308,6 +308,7 @@ const ModalTesting = ({
                 bordered
                 dataSource={data}
                 columns={column}
+                scroll={{ x: 2000 }}
                 rowKey={(item) => {
                   return item.id;
                 }}

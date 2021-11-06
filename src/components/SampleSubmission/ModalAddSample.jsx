@@ -222,6 +222,7 @@ const ModalAddSample = ({
                 bordered
                 dataSource={data}
                 columns={columns}
+                scroll={{ x: 2000 }}
                 rowKey={(item) => item.id}
               />
             </div>

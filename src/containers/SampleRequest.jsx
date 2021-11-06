@@ -7,6 +7,7 @@ import { getSampleRequest } from "actions/sample-request.action";
 const SampleRequest = ({
   setIsModalVisible,
   show,
+  showPdf,
   setSampleIdClick,
   setIdUser,
   setSampleIdExport,
@@ -26,6 +27,7 @@ const SampleRequest = ({
   return (
     <FormSample
       show={show}
+      showPdf={showPdf}
       sampleList={sampleList}
       setIsModalVisible={setIsModalVisible}
       setSampleIdClick={setSampleIdClick}

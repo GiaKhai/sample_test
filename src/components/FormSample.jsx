@@ -8,6 +8,7 @@ const FormSample = ({
   sampleList,
   setIsModalVisible,
   show,
+  showPdf,
   setSampleIdClick,
   setIdUser,
   setSampleIdExport,
@@ -191,8 +192,8 @@ const FormSample = ({
           <Button
             type="primary"
             onClick={() => {
-              setSampleIdExport(record.sample_request_id);
-              setIsModalPdf(true);
+              showPdf && setSampleIdExport(record.sample_request_id);
+              showPdf && setIsModalPdf(true);
             }}
           >
             Export

@@ -167,6 +167,7 @@ class ComponentToPrint extends React.PureComponent {
                 dataSource={this.props.testExport.results}
                 bordered={true}
                 pagination={false}
+                scroll={{ x: 2000 }}
               />
               <div className="title-table">
                 <span className="name">Remarks:</span>
@@ -193,7 +194,7 @@ const Export = ({ isModalPdf, testExport, handleCancel }) => {
 
   return (
     <Modal
-      title="preview"
+      title="Preview report"
       visible={isModalPdf}
       width={1000}
       closable={true}

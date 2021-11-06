@@ -26,23 +26,22 @@ const logoutOnClick = async () => {
 
 const { Header } = Layout;
 
-class Head extends React.Component {
-  render() {
-    return (
-      <Header
-        className="site-layout-sub-header-background"
-        style={{ padding: 0 }}
+const Head = () => {
+  return (
+    <Header
+      className="site-layout-sub-header-background"
+      style={{ padding: 0 }}
+    >
+      <Button
+        className="btn-logout"
+        type="primary"
+        icon={<PoweroffOutlined />}
+        onClick={logoutOnClick}
       >
-        <Button
-          className="btn-logout"
-          type="primary"
-          icon={<PoweroffOutlined />}
-          onClick={logoutOnClick}
-        >
-          Logout
-        </Button>
-      </Header>
-    );
-  }
-}
+        Logout
+      </Button>
+    </Header>
+  );
+};
+
 export default Head;

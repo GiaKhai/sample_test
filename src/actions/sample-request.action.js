@@ -109,8 +109,8 @@ export const sampleTetingAction = async (body, id) => {
       body,
       config
     );
-    if (response.status === 201) {
-      Message.success("Testing success");
+    if (response.status === 200) {
+      Message.success("Test success");
       return { success: true };
     }
   } catch (error) {

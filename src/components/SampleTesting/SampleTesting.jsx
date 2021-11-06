@@ -42,6 +42,7 @@ const SampleTesting = () => {
 
     try {
       const { success } = await sampleTetingAction(body, idUser);
+      console.log(success);
       if (success) {
         setIsModalVisible(false);
         form.resetFields();

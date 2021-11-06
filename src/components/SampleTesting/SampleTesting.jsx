@@ -41,7 +41,6 @@ const SampleTesting = () => {
     };
 
     try {
-      await form.validateFields();
       const { success } = await sampleTetingAction(body, idUser);
       if (success) {
         setIsModalVisible(false);
@@ -86,7 +85,7 @@ const SampleTesting = () => {
         setIsModalVisible={setIsModalVisible}
         setSampleIdClick={setSampleIdClick}
         setIdUser={setIdUser}
-        show
+        showModalTesting
       />
 
       <ModalTesting

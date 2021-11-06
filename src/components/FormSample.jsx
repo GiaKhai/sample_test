@@ -7,8 +7,8 @@ import "./style.css";
 const FormSample = ({
   sampleList,
   setIsModalVisible,
-  show,
-  showPdf,
+  showModalTesting,
+  showModalExport,
   setSampleIdClick,
   setIdUser,
   setSampleIdExport,
@@ -192,8 +192,8 @@ const FormSample = ({
           <Button
             type="primary"
             onClick={() => {
-              showPdf && setSampleIdExport(record.sample_request_id);
-              showPdf && setIsModalPdf(true);
+              showModalExport && setSampleIdExport(record.sample_request_id);
+              showModalExport && setIsModalPdf(true);
             }}
           >
             Export
@@ -250,9 +250,9 @@ const FormSample = ({
           onRow={(record) => {
             return {
               onClick: (event) => {
-                show && setIsModalVisible(true);
-                show && setSampleIdClick(record.sample_request_id);
-                show && setIdUser(record.id);
+                showModalTesting && setIsModalVisible(true);
+                showModalTesting && setSampleIdClick(record.sample_request_id);
+                showModalTesting && setIdUser(record.id);
               }, // click row
             };
           }}

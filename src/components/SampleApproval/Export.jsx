@@ -10,6 +10,7 @@ class ComponentToPrint extends React.PureComponent {
         title: "TEST",
         dataIndex: "test",
         key: "test",
+        align: "center",
         render: (_, record) => {
           return record?.test?.test;
         },
@@ -18,6 +19,7 @@ class ComponentToPrint extends React.PureComponent {
         title: "UNIT",
         dataIndex: "unit",
         key: "unit",
+        align: "center",
         render: (_, record) => {
           return record?.test?.unit;
         },
@@ -26,6 +28,7 @@ class ComponentToPrint extends React.PureComponent {
         title: "METHOD",
         dataIndex: "method",
         key: "method",
+        align: "center",
         render: (_, record) => {
           return record?.test?.method;
         },
@@ -34,6 +37,7 @@ class ComponentToPrint extends React.PureComponent {
         title: "SPEC",
         dataIndex: "spect",
         key: "spect",
+        align: "center",
         render: (_, record) => {
           return record?.test?.spect;
         },
@@ -42,13 +46,13 @@ class ComponentToPrint extends React.PureComponent {
         title: "RESULT",
         dataIndex: "result",
         key: "result",
-        editable: true,
+        align: "center",
       },
       {
         title: "INITIAL",
         dataIndex: "initial",
         key: "initial",
-        editable: true,
+        align: "center",
       },
     ];
     console.log(this.props.testExport);
@@ -167,7 +171,7 @@ class ComponentToPrint extends React.PureComponent {
                 dataSource={this.props.testExport.results}
                 bordered={true}
                 pagination={false}
-                scroll={{ x: 2000 }}
+                scroll={{ x: 700 }}
               />
               <div className="title-table">
                 <span className="name">Remarks:</span>

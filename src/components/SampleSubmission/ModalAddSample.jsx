@@ -41,33 +41,37 @@ const ModalAddSample = ({
       title: "TEST",
       dataIndex: "test",
       key: "test",
+      align: "center",
     },
     {
       title: "UNIT",
       dataIndex: "unit",
       key: "unit",
+      align: "center",
     },
     {
       title: "METHOD",
       dataIndex: "method",
       key: "method",
+      align: "center",
     },
     {
       title: "SPEC",
       dataIndex: "spect",
       key: "spect",
+      align: "center",
     },
     {
       title: "RESULT",
       dataIndex: "result",
       key: "result",
-      editable: true,
+      align: "center",
     },
     {
       title: "INITIAL",
       dataIndex: "initial",
       key: "initial",
-      editable: true,
+      align: "center",
     },
   ];
   return (
@@ -222,7 +226,7 @@ const ModalAddSample = ({
                 bordered
                 dataSource={data}
                 columns={columns}
-                scroll={{ x: 2000 }}
+                scroll={{ x: 700 }}
                 rowKey={(item) => item.id}
               />
             </div>

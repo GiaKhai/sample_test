@@ -96,6 +96,7 @@ const ModalTesting = ({
       title: "TEST",
       dataIndex: "test",
       key: "test",
+      align: "center",
       render: (_, record) => {
         return record?.test?.test;
       },
@@ -104,6 +105,7 @@ const ModalTesting = ({
       title: "UNIT",
       dataIndex: "unit",
       key: "unit",
+      align: "center",
       render: (_, record) => {
         return record?.test?.unit;
       },
@@ -112,6 +114,7 @@ const ModalTesting = ({
       title: "METHOD",
       dataIndex: "method",
       key: "method",
+      align: "center",
       render: (_, record) => {
         return record?.test?.method;
       },
@@ -120,6 +123,7 @@ const ModalTesting = ({
       title: "SPEC",
       dataIndex: "spect",
       key: "spect",
+      align: "center",
       render: (_, record) => {
         return record?.test?.spect;
       },
@@ -128,12 +132,14 @@ const ModalTesting = ({
       title: "RESULT",
       dataIndex: "result",
       key: "result",
+      align: "center",
       editable: true,
     },
     {
       title: "INITIAL",
       dataIndex: "initial",
       key: "initial",
+      align: "center",
       editable: true,
     },
   ];
@@ -308,7 +314,7 @@ const ModalTesting = ({
                 bordered
                 dataSource={data}
                 columns={column}
-                scroll={{ x: 2000 }}
+                scroll={{ x: 700 }}
                 rowKey={(item) => {
                   return item.id;
                 }}

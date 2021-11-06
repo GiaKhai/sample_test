@@ -26,7 +26,7 @@ const SampleApproval = () => {
       <FormSample
         setSampleIdExport={setSampleIdExport}
         setIsModalPdf={setIsModalPdf}
-        showPdf
+        showModalExport
       />
       <Export
         isModalPdf={isModalPdf}

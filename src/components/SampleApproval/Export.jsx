@@ -55,7 +55,6 @@ class ComponentToPrint extends React.PureComponent {
         align: "center",
       },
     ];
-    console.log(this.props.testExport);
     return (
       <div className="container-pdf">
         <Row>

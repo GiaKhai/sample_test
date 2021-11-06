@@ -11,7 +11,7 @@ const ForgetPasswordContainer = () => {
     const test = await resetPassword(email);
     // if (success) {
     //   form.resetFields();
-    console.log(test);
+    // console.log(test);
     // } else {
     //   notification.error({
     //     message: "Error",

@@ -11,7 +11,6 @@ const SampleApproval = () => {
   const sampleList = useSelector(
     (state) => state.sampleReducers.sampleList.results
   );
-  console.log(sampleList);
   const testExport = sampleList?.find(
     (item) => item.sample_request_id === sampleIdExport
   );

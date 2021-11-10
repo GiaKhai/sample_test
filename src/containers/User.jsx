@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Administration from "../components/Admin/Administration";
 import { getUserAction, updateStatusAction } from "actions/user.action";
-import { getCookie } from "utils/getCookie";
 
 const User = () => {
   const [list, setList] = useState([]);
   const [checkStatusUsers, setCheckStatusUsers] = useState("other");
   const [check, setCheck] = useState(true);
+  const [filter, setFilter] = useState("");
 
   const dispatch = useDispatch();
-  const token = getCookie("token");
 
-  const userList = useSelector((state) => state.userReducers.userList);
+  const userList = useSelector((state) => state.userReducers.userList.data);
   // userList.sort((a, b) => a.id - b.id); //sort id
 
   useEffect(() => {
-    dispatch(getUserAction(token));
-  }, [dispatch, token, check]);
+    dispatch(getUserAction(filter));
+  }, [dispatch, filter, check]);
+
+  const onsubmit = (newfilter) => {
+    setFilter(newfilter);
+  };
 
   const checked = (record) => {
     let status = "";
@@ -96,6 +99,7 @@ const User = () => {
       onChange={onChange}
       updateListUser={updateListUser}
       checkStatusUsers={checkStatusUsers}
+      onsubmit={onsubmit}
     />
   );
 };

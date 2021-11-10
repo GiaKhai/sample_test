@@ -31,21 +31,25 @@ const getworksheetSuccess = (data) => {
   };
 };
 
-const geworksheetFail = () => {
+const getworksheetFail = () => {
   return {
     type: worksheetContants.GET_WORKSHEET_FAIL,
   };
 };
 
-export const getSampleRequest = () => {
+export const getSampleRequest = (filter) => {
   let config = {
     headers: {
       Authorization: "Bearer " + token,
     },
   };
+
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${baseURL}${sampleRequestURL}`, config);
+      const response = await axios.get(
+        `${baseURL}${sampleRequestURL}?name_of_sample=${filter}`,
+        config
+      );
       if (response.status === 200) {
         dispatch(getSampleSuccess(response));
       }
@@ -68,7 +72,7 @@ export const getWorksheet = () => {
         dispatch(getworksheetSuccess(response));
       }
     } catch (error) {
-      dispatch(geworksheetFail());
+      dispatch(getworksheetFail());
     }
   };
 };

@@ -13,17 +13,12 @@ const Administration = ({
   onChange,
   updateListUser,
   checkStatusUsers,
+  onsubmit,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("");
   const typingTimeoutRef = useRef(null);
   const [form] = useForm();
-
-  const onsubmit = (newfilter) => {
-    setFilter(newfilter);
-    console.log(filter);
-  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -36,7 +31,7 @@ const Administration = ({
     }
 
     typingTimeoutRef.current = setTimeout(() => {
-      const formValue = { search: value };
+      const formValue = value;
       onsubmit(formValue);
     }, 400);
   };

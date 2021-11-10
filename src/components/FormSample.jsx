@@ -13,14 +13,27 @@ const FormSample = ({
   setIdUser,
   setSampleIdExport,
   setIsModalPdf,
+  onsubmit,
 }) => {
   const [search, setSearch] = useState("");
-  // const [filter, setFilter] = useState("");
+
   const typingTimeoutRef = useRef(null);
 
-  // const onsubmit = (newfilter) => {
-  //   setFilter(newfilter);
-  // };
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+
+    if (!onsubmit) return;
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(() => {
+      const formValue = value;
+      onsubmit(formValue);
+    }, 400);
+  };
 
   const columns = [
     {
@@ -205,21 +218,6 @@ const FormSample = ({
     },
   ];
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-
-    if (!onsubmit) return;
-
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-    }
-
-    typingTimeoutRef.current = setTimeout(() => {
-      const formValue = { search: value };
-      onsubmit(formValue);
-    }, 400);
-  };
   return (
     <>
       <div className="search-input">

@@ -18,7 +18,7 @@ const getUserFail = () => {
   };
 };
 
-export const getUserAction = () => {
+export const getUserAction = (filter) => {
   let config = {
     headers: {
       Authorization: "Bearer " + token,
@@ -26,7 +26,10 @@ export const getUserAction = () => {
   };
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${baseURL}${userURL}`, config);
+      const response = await axios.get(
+        `${baseURL}${userURL}?first_name=${filter}`,
+        config
+      );
       if (response.status === 200) {
         dispatch(getUserSuccess(response));
       }
